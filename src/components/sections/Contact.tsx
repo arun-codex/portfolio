@@ -11,6 +11,7 @@ import { Mail, MapPin, Send, ChevronDown, ChevronUp } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import { Github, Linkedin, Twitter, Instagram } from "@/components/ui/SocialIcons";
+import { LinkedInBadge } from "@/components/ui/LinkedInBadge";
 
 const personalIconMap: Record<string, React.ElementType> = {
   Twitter: Twitter,
@@ -87,6 +88,18 @@ export function Contact() {
                   <a href={socialLinks.professional[1].url} target="_blank" rel="noopener noreferrer" className="text-sm hover:underline" style={{ color: "var(--text-primary)" }}>
                     linkedin.com/in/itzarun1806
                   </a>
+                </div>
+              </GlassCard>
+
+              <GlassCard hover={false} className="!p-4">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Linkedin size={18} style={{ color: "var(--accent-primary)" }} />
+                    <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                      LinkedIn Badge
+                    </span>
+                  </div>
+                  <LinkedInBadge vanity="itzarun1806" size="small" type="horizontal" />
                 </div>
               </GlassCard>
 
