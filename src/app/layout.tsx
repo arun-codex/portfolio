@@ -86,7 +86,7 @@ export default function RootLayout({
     email: "mrarunkumar1806@gmail.com",
     jobTitle: "BCA Student & Cybersecurity Enthusiast",
     sameAs: [
-      "https://github.com/mrarunkumar18",
+      "https://github.com/arun-codex",
       "https://www.linkedin.com/in/itzarun1806/",
       "https://x.com/itz_arun_1806",
     ],

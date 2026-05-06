@@ -12,7 +12,7 @@ export const socialLinks = {
   professional: [
     {
       name: "GitHub",
-      url: "https://github.com/mrarunkumar18",
+      url: "https://github.com/arun-codex",
       icon: "Github",
     },
     {
