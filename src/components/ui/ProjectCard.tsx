@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { fadeInUp, cardHover, cardTap } from "@/lib/animations";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { Github } from "@/components/ui/SocialIcons";
 import Image from "next/image";
 import type { Project } from "@/data/projects";
 

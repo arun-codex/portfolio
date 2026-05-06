@@ -7,13 +7,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/Button";
 import { personal, socialLinks } from "@/data/personal";
-import { Mail, Github, Linkedin, MapPin, Send, ChevronDown, ChevronUp } from "lucide-react";
+import { Mail, MapPin, Send, ChevronDown, ChevronUp } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { type LucideIcon } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram } from "@/components/ui/SocialIcons";
 
-const personalIconMap: Record<string, LucideIcon> = {
-  Twitter: LucideIcons.Twitter,
-  Instagram: LucideIcons.Instagram,
+const personalIconMap: Record<string, React.ElementType> = {
+  Twitter: Twitter,
+  Instagram: Instagram,
   Music: LucideIcons.Music,
 };
 

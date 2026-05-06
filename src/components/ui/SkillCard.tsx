@@ -12,7 +12,7 @@ interface SkillCardProps {
 }
 
 export function SkillCard({ name, icon, index }: SkillCardProps) {
-  const IconComponent = (LucideIcons as Record<string, LucideIcon>)[icon] || LucideIcons.Code2;
+  const IconComponent = (LucideIcons as any)[icon] || LucideIcons.Code2;
 
   return (
     <motion.div

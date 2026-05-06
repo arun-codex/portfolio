@@ -10,10 +10,11 @@ import { Download, ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
 import * as LucideIcons from "lucide-react";
 import { type LucideIcon } from "lucide-react";
+import { Github, Linkedin } from "@/components/ui/SocialIcons";
 
-const socialIconMap: Record<string, LucideIcon> = {
-  Github: LucideIcons.Github,
-  Linkedin: LucideIcons.Linkedin,
+const socialIconMap: Record<string, React.ElementType> = {
+  Github: Github,
+  Linkedin: Linkedin,
   Mail: LucideIcons.Mail,
 };
 

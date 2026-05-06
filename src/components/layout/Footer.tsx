@@ -1,7 +1,8 @@
 "use client";
 
 import { personal, socialLinks } from "@/data/personal";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Mail, Heart } from "lucide-react";
+import { Github, Linkedin } from "@/components/ui/SocialIcons";
 
 const iconMap: Record<string, React.ReactNode> = {
   Github: <Github size={18} />,
