@@ -31,6 +31,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Arun Kumar" }],
   creator: "Arun Kumar",
   metadataBase: new URL("https://arunsingh.xyz"),
+  icons: {
+    icon: "/images/profile.png",
+    apple: "/images/profile.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
