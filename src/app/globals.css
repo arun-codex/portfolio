@@ -1,0 +1,340 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ========================================
+   TAILWIND v4 THEME — Cybersecurity Portfolio
+   Premium palette: purple + cyan on deep dark
+   ======================================== */
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ========================================
+   CSS CUSTOM PROPERTIES — DARK MODE (default)
+   ======================================== */
+:root {
+  --bg-primary: #0B0F14;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1a2332;
+  --bg-glass: rgba(17, 24, 39, 0.6);
+  --bg-glass-hover: rgba(17, 24, 39, 0.8);
+
+  --accent-primary: #8B5CF6;
+  --accent-primary-hover: #7C3AED;
+  --accent-primary-glow: rgba(139, 92, 246, 0.15);
+  --accent-secondary: #06B6D4;
+  --accent-secondary-glow: rgba(6, 182, 212, 0.15);
+
+  --text-primary: #E5E7EB;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-accent: rgba(139, 92, 246, 0.3);
+
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.1);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   LIGHT MODE
+   ======================================== */
+.light {
+  --bg-primary: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F1F5F9;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-hover: rgba(255, 255, 255, 0.85);
+
+  --accent-primary: #7C3AED;
+  --accent-primary-hover: #6D28D9;
+  --accent-primary-glow: rgba(124, 58, 237, 0.1);
+  --accent-secondary: #0891B2;
+  --accent-secondary-glow: rgba(8, 145, 178, 0.1);
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --border-accent: rgba(124, 58, 237, 0.2);
+
+  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.08);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) var(--bg-surface);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* ========================================
+   SKIP LINK (Accessibility)
+   ======================================== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--accent-primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ========================================
+   GLASSMORPHISM UTILITIES
+   ======================================== */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-hover:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ========================================
+   ANIMATED GRID BACKGROUND
+   ======================================== */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
+}
+
+.grid-bg-animated {
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* ========================================
+   GLOW DOT (for decorative accents)
+   ======================================== */
+.glow-dot {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.glow-dot-purple {
+  background: var(--accent-primary);
+}
+
+.glow-dot-cyan {
+  background: var(--accent-secondary);
+}
+
+/* ========================================
+   CURSOR BLINK (terminal-style)
+   ======================================== */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  color: var(--accent-primary);
+  font-weight: 300;
+}
+
+/* ========================================
+   SECTION STYLES
+   ======================================== */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================
+   FOCUS STYLES (Accessibility)
+   ======================================== */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .grid-bg-animated {
+    animation: none;
+  }
+}
+
+/* ========================================
+   LOADING SCREEN
+   ======================================== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+}
+
+/* ========================================
+   SCROLL PROGRESS BAR
+   ======================================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  z-index: 9998;
+  transform-origin: left;
+}
+
+/* ========================================
+   TERMINAL
+   ======================================== */
+.terminal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-window {
+  width: min(90vw, 700px);
+  max-height: 80vh;
+  background: #0d1117;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #161b22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-body {
+  padding: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  color: #c9d1d9;
+}
+
+.terminal-body .prompt {
+  color: var(--accent-primary);
+}
+
+.terminal-body .output {
+  color: #8b949e;
+  white-space: pre-wrap;
+}
+
+.terminal-body .highlight {
+  color: var(--accent-secondary);
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arunsingh.xyz/sitemap.xml
