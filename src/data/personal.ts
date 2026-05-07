@@ -54,7 +54,7 @@ export const typingRoles = [
 
 export const stats = [
   { label: "Projects Completed", value: 4 },
-  { label: "Certifications", value: 0 },
+  { label: "Certifications", value: 1 },
   { label: "GitHub Repositories", value: 10 },
 ] as const;
 
