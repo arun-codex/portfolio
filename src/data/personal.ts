@@ -2,7 +2,7 @@ export const personal = {
   name: "Arun Kumar",
   headline: "Cybersecurity Enthusiast & Developer",
   bio: `BCA student building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects. Focused on becoming internship-ready through execution rather than theory alone.`,
-  email: "mrarunkumar1806@gmail.com",
+  email: "arun.cyberx@gmail.com",
   location: "India",
   website: "https://arunsingh.xyz",
   resumeUrl: "/resume.pdf",
@@ -22,7 +22,7 @@ export const socialLinks = {
     },
     {
       name: "Email",
-      url: "mailto:mrarunkumar1806@gmail.com",
+      url: "mailto:arun.cyberx@gmail.com",
       icon: "Mail",
     },
   ],

@@ -83,7 +83,7 @@ export default function RootLayout({
     "@type": "Person",
     name: "Arun Kumar",
     url: "https://arunsingh.xyz",
-    email: "mrarunkumar1806@gmail.com",
+    email: "arun.cyberx@gmail.com",
     jobTitle: "BCA Student & Cybersecurity Enthusiast",
     sameAs: [
       "https://github.com/arun-codex",
