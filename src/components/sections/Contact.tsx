@@ -64,7 +64,7 @@ export function Contact() {
                 <div className="flex items-center gap-3">
                   <Linkedin size={18} style={{ color: "var(--accent-primary)" }} />
                   <a href={socialLinks.professional[1].url} target="_blank" rel="noopener noreferrer" className="text-sm hover:underline" style={{ color: "var(--text-primary)" }}>
-                    linkedin.com/in/itzarun1806
+                    linkedin.com/in/arun-codex
                   </a>
                 </div>
               </GlassCard>

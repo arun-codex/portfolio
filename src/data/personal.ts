@@ -17,7 +17,7 @@ export const socialLinks = {
     },
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/itzarun1806/",
+      url: "https://www.linkedin.com/in/arun-codex/",
       icon: "Linkedin",
     },
     {

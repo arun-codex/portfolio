@@ -87,7 +87,7 @@ export default function RootLayout({
     jobTitle: "BCA Student & Cybersecurity Enthusiast",
     sameAs: [
       "https://github.com/arun-codex",
-      "https://www.linkedin.com/in/itzarun1806/",
+      "https://www.linkedin.com/in/arun-codex/",
       "https://x.com/itz_arun_1806",
     ],
   };
