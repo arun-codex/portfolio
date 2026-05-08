@@ -70,6 +70,6 @@ export const projects: Project[] = [
     category: "Web",
     github: "https://github.com/arun-codex/Weather",
     liveDemo: "https://weather-omega-pink.vercel.app/",
-    image: "/images/projects/portfolio-website1.webp",
+    image: "/images/projects/weather.png",
   },
 ];
