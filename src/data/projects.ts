@@ -39,7 +39,7 @@ export const projects: Project[] = [
     category: "Web",
     github: "https://github.com/mrarunkumar18/portfolio",
     liveDemo: "https://arunsingh.xyz",
-    image: "/images/projects/portfolio-website.webp",
+    image: "/images/projects/portfolio.png",
   },
   {
     id: "system-programming-toolkit",
