@@ -61,4 +61,15 @@ export const projects: Project[] = [
     github: "https://github.com/mrarunkumar18",
     image: "/images/projects/ai-workflow.webp",
   },
+  {
+    id: "weather-app",
+    title: "Weather — UI Dashboard",
+    description:
+      "A modern weather dashboard built with React and deployed on Vercel. Features saved cities, 7-day forecasts, and responsive UI with smooth animations.",
+    skills: ["React", "Next.js", "Tailwind", "API"],
+    category: "Web",
+    github: "https://github.com/arun-codex/Weather",
+    liveDemo: "https://weather-omega-pink.vercel.app/",
+    image: "/images/projects/portfolio-website1.webp",
+  },
 ];
