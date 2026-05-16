@@ -3,8 +3,19 @@
 import { useState, useEffect, useCallback } from "react";
 import { getStoredTheme, setStoredTheme } from "@/lib/utils";
 
+export type Theme = "dark" | "light" | "cyberpunk";
+
+const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk"];
+
+function applyTheme(theme: Theme) {
+  const root = document.documentElement;
+  root.classList.remove("light", "cyberpunk");
+  if (theme === "light") root.classList.add("light");
+  if (theme === "cyberpunk") root.classList.add("cyberpunk");
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -12,23 +23,27 @@ export function useTheme() {
     const stored = getStoredTheme();
     if (stored) {
       setTheme(stored);
-      document.documentElement.classList.toggle("light", stored === "light");
+      applyTheme(stored);
     } else {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initial = prefersDark ? "dark" : "light";
+      const initial: Theme = prefersDark ? "dark" : "light";
       setTheme(initial);
-      document.documentElement.classList.toggle("light", initial === "light");
+      applyTheme(initial);
     }
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  const cycleTheme = useCallback(() => {
     setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
+      const currentIndex = THEME_ORDER.indexOf(prev);
+      const next = THEME_ORDER[(currentIndex + 1) % THEME_ORDER.length];
       setStoredTheme(next);
-      document.documentElement.classList.toggle("light", next === "light");
+      applyTheme(next);
       return next;
     });
   }, []);
 
-  return { theme, toggleTheme, mounted };
+  // Keep backward compat: toggleTheme still cycles
+  const toggleTheme = cycleTheme;
+
+  return { theme, cycleTheme, toggleTheme, mounted };
 }

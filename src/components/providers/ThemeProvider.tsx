@@ -5,16 +5,18 @@ import {
   useContext,
   type ReactNode,
 } from "react";
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme, type Theme } from "@/hooks/useTheme";
 
 interface ThemeContextType {
-  theme: "dark" | "light";
-  toggleTheme: () => void;
+  theme: Theme;
+  cycleTheme: () => void;
+  toggleTheme: () => void; // kept for backward compat
   mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: "dark",
+  cycleTheme: () => {},
   toggleTheme: () => {},
   mounted: false,
 });
