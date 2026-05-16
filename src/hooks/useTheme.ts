@@ -20,6 +20,7 @@ export function useTheme() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const stored = getStoredTheme();
     if (stored) {
@@ -31,6 +32,12 @@ export function useTheme() {
       setTheme(initial);
       applyTheme(initial);
     }
+  }, []);
+
+  const setSelectedTheme = useCallback((nextTheme: Theme) => {
+    setTheme(nextTheme);
+    setStoredTheme(nextTheme);
+    applyTheme(nextTheme);
   }, []);
 
   const cycleTheme = useCallback(() => {
@@ -46,5 +53,6 @@ export function useTheme() {
   // Keep backward compat: toggleTheme still cycles
   const toggleTheme = cycleTheme;
 
-  return { theme, cycleTheme, toggleTheme, mounted };
+  return { theme, setTheme: setSelectedTheme, cycleTheme, toggleTheme, mounted };
 }
+

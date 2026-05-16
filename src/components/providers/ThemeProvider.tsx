@@ -9,6 +9,7 @@ import { useTheme, type Theme } from "@/hooks/useTheme";
 
 interface ThemeContextType {
   theme: Theme;
+  setTheme: (theme: Theme) => void;
   cycleTheme: () => void;
   toggleTheme: () => void; // kept for backward compat
   mounted: boolean;
@@ -16,6 +17,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: "dark",
+  setTheme: () => {},
   cycleTheme: () => {},
   toggleTheme: () => {},
   mounted: false,
