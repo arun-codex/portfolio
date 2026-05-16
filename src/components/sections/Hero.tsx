@@ -9,7 +9,6 @@ import { AnimatedGrid } from "@/components/ui/AnimatedGrid";
 import { Download, ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
 import * as LucideIcons from "lucide-react";
-import { type LucideIcon } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/SocialIcons";
 
 const socialIconMap: Record<string, React.ElementType> = {

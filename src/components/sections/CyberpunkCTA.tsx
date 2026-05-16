@@ -20,7 +20,6 @@ export function CyberpunkCTA() {
           flexWrap: "wrap",
         }}
       >
-        {/* Heading */}
         <div style={{ flex: 1, minWidth: "280px" }}>
           <p
             style={{
@@ -32,7 +31,7 @@ export function CyberpunkCTA() {
               marginBottom: "1rem",
             }}
           >
-            // READY_TO_EXECUTE
+            {"// READY_TO_EXECUTE"}
           </p>
           <h2
             style={{
@@ -57,7 +56,6 @@ export function CyberpunkCTA() {
           </h2>
         </div>
 
-        {/* CTA Right */}
         <div
           style={{
             display: "flex",
@@ -95,7 +93,6 @@ export function CyberpunkCTA() {
             INITIATE_CONTACT
           </a>
 
-          {/* Status bar */}
           <div
             style={{
               display: "flex",

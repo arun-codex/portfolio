@@ -11,8 +11,10 @@ interface SkillCardProps {
   index: number;
 }
 
+const iconMap = LucideIcons as unknown as Record<string, LucideIcon>;
+
 export function SkillCard({ name, icon, index }: SkillCardProps) {
-  const IconComponent = (LucideIcons as any)[icon] || LucideIcons.Code2;
+  const IconComponent = iconMap[icon] || LucideIcons.Code2;
 
   return (
     <motion.div
@@ -40,3 +42,4 @@ export function SkillCard({ name, icon, index }: SkillCardProps) {
     </motion.div>
   );
 }
+

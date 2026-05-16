@@ -57,7 +57,6 @@ export function CyberpunkServicesGrid() {
         borderTop: "1px solid #FFFFFF",
       }}
     >
-      {/* Section header */}
       <div
         style={{
           padding: "2rem",
@@ -75,7 +74,7 @@ export function CyberpunkServicesGrid() {
             letterSpacing: "0.15em",
           }}
         >
-          // CAPABILITY_MATRIX
+          {"// CAPABILITY_MATRIX"}
         </span>
         <div style={{ flex: 1, height: "1px", background: "#111111" }} />
         <span
@@ -89,7 +88,6 @@ export function CyberpunkServicesGrid() {
         </span>
       </div>
 
-      {/* Grid */}
       <div
         style={{
           display: "grid",
@@ -127,7 +125,6 @@ function ServiceCard({
         minHeight: "240px",
       }}
     >
-      {/* Icon */}
       <div>
         <Icon
           size={24}
@@ -135,7 +132,6 @@ function ServiceCard({
         />
       </div>
 
-      {/* Title */}
       <h3
         style={{
           fontFamily: "'Space Grotesk', sans-serif",
@@ -149,7 +145,6 @@ function ServiceCard({
         {card.title}
       </h3>
 
-      {/* Description */}
       <p
         style={{
           fontFamily: "'JetBrains Mono', monospace",
@@ -162,7 +157,6 @@ function ServiceCard({
         {card.description}
       </p>
 
-      {/* Tag */}
       <div>
         <span
           style={{

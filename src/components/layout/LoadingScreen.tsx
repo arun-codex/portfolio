@@ -8,25 +8,18 @@ import { personal } from "@/data/personal";
 
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
-  const [shouldShow, setShouldShow] = useState(false);
 
   useEffect(() => {
-    // Skip loading for returning visitors
-    if (hasVisitedBefore()) {
+    const delay = hasVisitedBefore() ? 0 : 700;
+    const timer = window.setTimeout(() => {
       setIsLoading(false);
-      return;
-    }
-
-    setShouldShow(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      markVisited();
-    }, 700);
+      if (delay !== 0) {
+        markVisited();
+      }
+    }, delay);
 
     return () => clearTimeout(timer);
   }, []);
-
-  if (!shouldShow) return null;
 
   return (
     <AnimatePresence>
@@ -38,10 +31,8 @@ export function LoadingScreen() {
           className="loading-screen"
         >
           <div className="text-center">
-            {/* Subtle grid */}
             <div className="absolute inset-0 grid-bg opacity-20" aria-hidden="true" />
 
-            {/* Brand */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

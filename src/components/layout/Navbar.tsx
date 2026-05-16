@@ -7,7 +7,7 @@ import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { useThemeContext } from "@/components/providers/ThemeProvider";
 import { navLinks, personal } from "@/data/personal";
 import { cn } from "@/lib/utils";
-import { Sun, Moon, Terminal, Menu, X, Pencil } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
 
@@ -22,70 +22,143 @@ const cyberpunkNavLabels: Record<string, string> = {
   Contact: "07_CONTACT",
 };
 
-/* Theme cycle icon & label */
-function ThemeCycleButton({
+const themeOptions = [
+  { key: "dark", label: "Dark" },
+  { key: "light", label: "Light" },
+  { key: "cyberpunk", label: "Cyberpunk" },
+  { key: "sketchbook", label: "Sketchbook" },
+] as const;
+
+function ThemeMenuControl({
   theme,
-  cycleTheme,
+  setTheme,
   isCyberpunk,
+  open,
+  onToggle,
+  onClose,
 }: {
   theme: string;
-  cycleTheme: () => void;
+  setTheme: (theme: (typeof themeOptions)[number]["key"]) => void;
   isCyberpunk: boolean;
+  open: boolean;
+  onToggle: () => void;
+  onClose: () => void;
 }) {
-  const label =
-    theme === "dark"
-      ? "Switch to light mode"
-      : theme === "light"
-      ? "Switch to cyberpunk mode"
-      : theme === "cyberpunk"
-      ? "Switch to sketchbook mode"
-      : "Switch to dark mode";
-
-  if (isCyberpunk) {
-    return (
-      <button
-        onClick={cycleTheme}
-        className="btn-brutalist"
-        style={{ padding: "0.4rem 0.9rem", fontSize: "11px" }}
-        aria-label={label}
-        title={label}
-      >
-        EXECUTE_REQUEST.EXE
-      </button>
-    );
-  }
+  const panelClass = isCyberpunk
+    ? "border border-[#FFFFFF] bg-black"
+    : "border border-[var(--border-subtle)] bg-[var(--bg-glass)]";
 
   return (
-    <button
-      onClick={cycleTheme}
-      className={cn(
-        "ml-2 p-2 transition-colors",
-        isCyberpunk
-          ? "border border-[#333333] hover:border-[#00FF00]"
-          : "rounded-[var(--radius-sm)] hover:bg-[var(--bg-surface-hover)]"
-      )}
-      style={{ color: "var(--text-secondary)" }}
-      aria-label={label}
-      title={label}
-    >
-      {theme === "dark" ? (
-        <Moon size={18} />
-      ) : theme === "light" ? (
-        <Sun size={18} />
-      ) : theme === "cyberpunk" ? (
-        <Terminal size={18} />
-      ) : (
-        <Pencil size={18} />
-      )}
-    </button>
+    <div className="relative">
+      <button
+        onClick={onToggle}
+        className={cn(
+          "flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm transition-all duration-200",
+          isCyberpunk
+            ? "border border-[#333333] bg-black text-white hover:border-[#00FF00]"
+            : "border border-[var(--border-subtle)] bg-[var(--bg-glass)] hover:bg-[var(--bg-surface-hover)]"
+        )}
+        style={{ color: isCyberpunk ? "#FFFFFF" : "var(--text-secondary)" }}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        <span className={isCyberpunk ? "font-mono text-[11px] uppercase tracking-[0.08em]" : ""}>
+          Theme
+        </span>
+        <ChevronDown size={14} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            className={cn(
+              "absolute right-0 top-full z-20 mt-2 w-[220px] rounded-[var(--radius-md)] p-2 shadow-lg",
+              panelClass,
+              isCyberpunk && "font-mono"
+            )}
+          >
+            <div
+              className={cn(
+                "px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.18em]",
+                isCyberpunk ? "text-[#FFFFFF]" : "text-[var(--text-muted)]"
+              )}
+            >
+              Theme List
+            </div>
+            <div className="flex flex-col gap-1">
+              {themeOptions.map((option) => {
+                const isActive = theme === option.key;
+                return (
+                  <button
+                    key={option.key}
+                    onClick={() => {
+                      setTheme(option.key);
+                      onClose();
+                    }}
+                    className={cn(
+                      "flex items-center justify-between rounded-[var(--radius-sm)] px-3 py-2 text-sm transition-all duration-200",
+                      isCyberpunk && "text-[11px] uppercase tracking-[0.08em]"
+                    )}
+                    style={{
+                      background: isActive
+                        ? isCyberpunk
+                          ? "#00FF00"
+                          : "var(--accent-primary)"
+                        : "transparent",
+                      color: isActive
+                        ? isCyberpunk
+                          ? "#000000"
+                          : "#ffffff"
+                        : isCyberpunk
+                        ? "#FFFFFF"
+                        : "var(--text-secondary)",
+                      border: `1px solid ${
+                        isActive
+                          ? isCyberpunk
+                            ? "#00FF00"
+                            : "var(--accent-primary)"
+                          : isCyberpunk
+                          ? "#333333"
+                          : "transparent"
+                      }`,
+                    }}
+                    aria-pressed={isActive}
+                  >
+                    <span className="font-medium">{option.label}</span>
+                    <span
+                      className="text-[11px] uppercase tracking-[0.16em]"
+                      style={{
+                        color: isActive
+                          ? isCyberpunk
+                            ? "#000000"
+                            : "#ffffff"
+                          : isCyberpunk
+                          ? "#888888"
+                          : "var(--text-muted)",
+                      }}
+                    >
+                      {isActive ? "Active" : "Select"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const activeId = useScrollSpy(sectionIds);
-  const { theme, cycleTheme, mounted } = useThemeContext();
+  const { theme, setTheme, mounted } = useThemeContext();
   const isCyberpunk = theme === "cyberpunk";
 
   useEffect(() => {
@@ -186,13 +259,16 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Right: CTA + Mobile */}
+          {/* Right: Theme list + Mobile */}
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {mounted && (
-              <ThemeCycleButton
+              <ThemeMenuControl
                 theme={theme}
-                cycleTheme={cycleTheme}
+                setTheme={setTheme}
                 isCyberpunk={true}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
               />
             )}
             <button
@@ -292,7 +368,7 @@ export function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-3">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -314,25 +390,21 @@ export function Navbar() {
             </a>
           ))}
 
-          {/* Theme Cycle Button */}
+          {/* Theme menu */}
           {mounted && (
-            <ThemeCycleButton
+            <ThemeMenuControl
               theme={theme}
-              cycleTheme={cycleTheme}
+              setTheme={setTheme}
               isCyberpunk={false}
+              open={isThemeMenuOpen}
+              onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+              onClose={() => setIsThemeMenuOpen(false)}
             />
           )}
         </div>
 
         {/* Mobile Controls */}
         <div className="flex md:hidden items-center gap-2">
-          {mounted && (
-            <ThemeCycleButton
-              theme={theme}
-              cycleTheme={cycleTheme}
-              isCyberpunk={false}
-            />
-          )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="p-2 rounded-[var(--radius-sm)]"
@@ -364,6 +436,16 @@ export function Navbar() {
               className="fixed top-16 right-0 bottom-0 w-72 md:hidden p-6 flex flex-col gap-2"
               style={{ background: "var(--bg-surface)", borderLeft: "1px solid var(--border-subtle)" }}
             >
+              {mounted && (
+                <ThemeMenuControl
+                  theme={theme}
+                  setTheme={setTheme}
+                  isCyberpunk={false}
+                  open={isThemeMenuOpen}
+                  onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                  onClose={() => setIsThemeMenuOpen(false)}
+                />
+              )}
               {navLinks.map((link) => (
                 <a
                   key={link.href}

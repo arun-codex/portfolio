@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef } from "react";
-
 const DATA_METRICS = [
   { label: "PROJECTS_BUILT", value: "04", unit: "TOTAL" },
   { label: "CERTS_EARNED", value: "01+", unit: "ACTIVE" },

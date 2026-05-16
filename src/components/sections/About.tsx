@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
+import { fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { personal, stats } from "@/data/personal";
@@ -15,10 +15,7 @@ function AnimatedCounter({ value, label }: { value: number; label: string }) {
 
   useEffect(() => {
     if (!isInView) return;
-    if (value === 0) {
-      setCount(0);
-      return;
-    }
+    if (value === 0) return;
     let current = 0;
     const step = Math.max(1, Math.floor(value / 30));
     const interval = setInterval(() => {

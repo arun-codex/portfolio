@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
+import { fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/Button";
 import { personal, socialLinks } from "@/data/personal";
 import { Mail, MapPin, Send, ChevronDown, ChevronUp } from "lucide-react";
 import * as LucideIcons from "lucide-react";
-import { type LucideIcon } from "lucide-react";
 import { Github, Linkedin, Twitter, Instagram } from "@/components/ui/SocialIcons";
 
 const personalIconMap: Record<string, React.ElementType> = {

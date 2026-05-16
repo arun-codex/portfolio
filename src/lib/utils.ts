@@ -34,7 +34,7 @@ export function markVisited(): void {
 export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" | null {
   if (!isBrowser()) return null;
   const stored = localStorage.getItem("portfolio-theme");
-  if (stored === "dark" || stored === "light" || stored === "cyberpunk" || stored === "sketchbook") return stored as any;
+  if (stored === "dark" || stored === "light" || stored === "cyberpunk" || stored === "sketchbook") return stored;
   return null;
 }
 
