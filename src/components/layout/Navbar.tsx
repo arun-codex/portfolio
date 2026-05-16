@@ -27,6 +27,9 @@ const themeOptions = [
   { key: "light", label: "Light" },
   { key: "cyberpunk", label: "Cyberpunk" },
   { key: "sketchbook", label: "Sketchbook" },
+  { key: "terminal", label: "Terminal" },
+  { key: "neonspace", label: "NeonSpace" },
+  { key: "colobus", label: "Colobus Curio" },
 ] as const;
 
 function ThemeMenuControl({

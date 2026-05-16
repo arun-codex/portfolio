@@ -3,16 +3,19 @@
 import { useState, useEffect, useCallback } from "react";
 import { getStoredTheme, setStoredTheme } from "@/lib/utils";
 
-export type Theme = "dark" | "light" | "cyberpunk" | "sketchbook";
+export type Theme = "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus";
 
-const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "sketchbook"];
+const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus"];
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
-  root.classList.remove("light", "cyberpunk", "sketchbook");
+  root.classList.remove("light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus");
   if (theme === "light") root.classList.add("light");
   if (theme === "cyberpunk") root.classList.add("cyberpunk");
   if (theme === "sketchbook") root.classList.add("sketchbook");
+  if (theme === "terminal") root.classList.add("terminal");
+  if (theme === "neonspace") root.classList.add("neonspace");
+  if (theme === "colobus") root.classList.add("colobus");
 }
 
 export function useTheme() {

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,900,900italic&f[]=satoshi@400,500,700&display=swap');
 @import "tailwindcss";
 
 /* ========================================
@@ -258,6 +259,446 @@
 /* Cyberpunk scrollbar */
 .cyberpunk * {
   scrollbar-color: #00FF00 #000000;
+}
+
+/* ========================================
+   TERMINAL CLI THEME — Phosphor Green
+   ======================================== */
+.terminal {
+  --bg-primary: #0a0a0a;
+  --bg-surface: #0d0d0d;
+  --bg-surface-hover: #121212;
+  --bg-glass: rgba(10, 10, 10, 0.9);
+  --bg-glass-hover: rgba(10, 10, 10, 0.98);
+
+  --accent-primary: #33ff00;
+  --accent-primary-hover: #2de600;
+  --accent-primary-glow: rgba(51, 255, 0, 0.2);
+  --accent-secondary: #ffb000;
+  --accent-secondary-glow: rgba(255, 176, 0, 0.2);
+
+  --text-primary: #33ff00;
+  --text-secondary: #8fd98a;
+  --text-muted: #1f521f;
+
+  --border-subtle: #1f521f;
+  --border-hover: #33ff00;
+  --border-accent: #33ff00;
+
+  --shadow-glow: none;
+  --shadow-card: none;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --transition-fast: 120ms steps(2);
+  --transition-base: 160ms steps(2);
+  --transition-slow: 200ms steps(2);
+
+  --font-sans: var(--font-mono);
+  --font-heading: var(--font-mono);
+  --font-body: var(--font-mono);
+}
+
+.terminal body {
+  text-shadow: 0 0 5px rgba(51, 255, 0, 0.5);
+}
+
+.terminal h1,
+.terminal h2,
+.terminal h3,
+.terminal h4,
+.terminal h5,
+.terminal h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.terminal *,
+.terminal *::before,
+.terminal *::after {
+  border-radius: 0 !important;
+}
+
+/* ========================================
+   NEONSPACE THEME — Maximalist Brutalism
+   ======================================== */
+.neonspace {
+  --bg-primary: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f59e0b 100%);
+  --bg-surface: #18181b;
+  --bg-surface-hover: #1f1f24;
+  --bg-glass: rgba(255, 255, 255, 0.1);
+  --bg-glass-hover: rgba(255, 255, 255, 0.16);
+
+  --accent-primary: #bef264;
+  --accent-primary-hover: #a3e635;
+  --accent-primary-glow: rgba(190, 242, 100, 0.3);
+  --accent-secondary: #f472b6;
+  --accent-secondary-glow: rgba(244, 114, 182, 0.3);
+
+  --text-primary: #ffffff;
+  --text-secondary: #f8fafc;
+  --text-muted: #cbd5f5;
+
+  --border-subtle: rgba(255, 255, 255, 0.25);
+  --border-hover: rgba(255, 255, 255, 0.5);
+  --border-accent: #000000;
+
+  --shadow-glow: none;
+  --shadow-card: none;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --transition-fast: 180ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-base: 220ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-slow: 320ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --font-sans: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Cabinet Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+}
+
+.neonspace body {
+  background-attachment: fixed;
+}
+
+.neonspace h1,
+.neonspace h2,
+.neonspace h3,
+.neonspace h4,
+.neonspace h5,
+.neonspace h6 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.neonspace p,
+.neonspace span,
+.neonspace li {
+  font-family: var(--font-body);
+}
+
+.neonspace .glass {
+  background: var(--bg-glass);
+  border: 4px solid #000000;
+  outline: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.neonspace .glass-hover:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-hover);
+}
+
+.neonspace .btn-neonspace {
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.neonspace .btn-neonspace:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* ========================================
+   COLOBUS CURIO THEME — Digital Archive
+   Heritage palette: Cream, Deep Green, Crimson, Gold
+   ======================================== */
+.colobus {
+  --bg-primary: #fefdef;
+  --bg-surface: #eeedd9;
+  --bg-surface-hover: #f5f5f0;
+  --bg-glass: rgba(0, 96, 74, 0.08);
+  --bg-glass-hover: rgba(0, 96, 74, 0.12);
+
+  --accent-primary: #00604a;
+  --accent-primary-hover: #004a38;
+  --accent-primary-glow: rgba(0, 96, 74, 0.15);
+  --accent-secondary: #bd264a;
+  --accent-secondary-glow: rgba(189, 38, 74, 0.15);
+  --accent-gold: #d4af37;
+  --accent-gold-glow: rgba(212, 175, 55, 0.3);
+
+  --text-primary: #2c2c2c;
+  --text-secondary: #5a5a5a;
+  --text-muted: #8a8a8a;
+
+  --border-subtle: rgba(0, 96, 74, 0.1);
+  --border-hover: rgba(0, 96, 74, 0.2);
+  --border-accent: #d4af37;
+
+  --shadow-glow: 0 8px 24px rgba(0, 96, 74, 0.12);
+  --shadow-card: 0 4px 16px rgba(0, 96, 74, 0.08);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --transition-fast: 500ms ease-out;
+  --transition-base: 700ms ease-out;
+  --transition-slow: 1000ms ease-out;
+
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Playfair Display', ui-serif, serif;
+  --font-body: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+}
+
+.colobus body {
+  background: var(--bg-primary);
+  position: relative;
+}
+
+/* Noise overlay at 0.08 opacity */
+.colobus body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.08"/></svg>');
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.08;
+}
+
+.colobus h1,
+.colobus h2,
+.colobus h3,
+.colobus h4,
+.colobus h5,
+.colobus h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.colobus button,
+.colobus input,
+.colobus label,
+.colobus span {
+  font-family: var(--font-body);
+}
+
+/* Artifact floating animation */
+@keyframes artifact-float {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 0.15;
+  }
+}
+
+/* Staggered reveal */
+@keyframes colobus-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.colobus .artifact-float {
+  animation: artifact-float 6s infinite ease-in-out;
+}
+
+.colobus .colobus-reveal {
+  animation: colobus-reveal 0.8s ease-out forwards;
+}
+
+/* Gold ornamental corners for cards */
+.colobus .plaque-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--accent-gold);
+  pointer-events: none;
+}
+
+.colobus .plaque-corner.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.colobus .plaque-corner.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.colobus .plaque-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.colobus .plaque-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Plaque card - grayscale to color on hover */
+.colobus .plaque-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.colobus .plaque-card img {
+  filter: grayscale(100%);
+  transition: filter var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.colobus .plaque-card:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(0, 96, 74, 0.3);
+}
+
+/* Glass panels */
+.colobus .glass {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.colobus .glass-hover:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Ornamental divider */
+.colobus .ornamental-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 32px;
+}
+
+.colobus .ornamental-divider::before,
+.colobus .ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--accent-gold);
+  opacity: 0.4;
+}
+
+.colobus .ornamental-divider .gem {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-gold);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+}
+
+/* Discovery/Exhibition toggle */
+.colobus .discovery-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(44, 44, 44, 0.1);
+  padding: 4px;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+}
+
+.colobus .discovery-toggle input[type="checkbox"] {
+  appearance: none;
+  width: 32px;
+  height: 16px;
+  background: var(--accent-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-fast);
+}
+
+.colobus .discovery-toggle input[type="checkbox"]::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: left var(--transition-fast);
+}
+
+.colobus .discovery-toggle input[type="checkbox"]:checked::after {
+  left: 18px;
+}
+
+.colobus .discovery-toggle label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+/* Buttons styled for Colobus */
+.colobus .btn-colobus {
+  border: 1px solid var(--accent-primary);
+  background: transparent;
+  color: var(--accent-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+}
+
+.colobus .btn-colobus:hover {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.colobus .btn-colobus-cream {
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+}
+
+.colobus .btn-colobus-cream:hover {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
 }
 
 .cyberpunk *::-webkit-scrollbar-thumb {

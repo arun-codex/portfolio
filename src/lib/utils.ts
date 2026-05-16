@@ -31,17 +31,25 @@ export function markVisited(): void {
 /**
  * Get current theme from localStorage.
  */
-export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" | null {
+export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | null {
   if (!isBrowser()) return null;
   const stored = localStorage.getItem("portfolio-theme");
-  if (stored === "dark" || stored === "light" || stored === "cyberpunk" || stored === "sketchbook") return stored;
+  if (
+    stored === "dark" ||
+    stored === "light" ||
+    stored === "cyberpunk" ||
+    stored === "sketchbook" ||
+    stored === "terminal" ||
+    stored === "neonspace" ||
+    stored === "colobus"
+  ) return stored;
   return null;
 }
 
 /**
  * Store theme preference.
  */
-export function setStoredTheme(theme: "dark" | "light" | "cyberpunk" | "sketchbook"): void {
+export function setStoredTheme(theme: "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus"): void {
   if (!isBrowser()) return;
   localStorage.setItem("portfolio-theme", theme);
 }
