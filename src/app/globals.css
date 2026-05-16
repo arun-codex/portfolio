@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&display=swap');
 @import "tailwindcss";
 
 /* ========================================
@@ -11,6 +11,132 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
+
+/* ========================================
+   HAND-DRAWN SKETCHBOOK THEME
+   An organic, tactile design: paper background, handwritten fonts
+   ======================================== */
+.sketchbook {
+  --bg-primary: #fdfaf6;
+  --bg-surface: #fffdfa;
+  --bg-surface-hover: #f6f2ea;
+  --bg-glass: rgba(253, 250, 246, 0.85);
+  --bg-glass-hover: rgba(253, 250, 246, 0.95);
+
+  --accent-primary: #fb923c; /* orange */
+  --accent-secondary: #60a5fa; /* blue */
+  --accent-yellow: #fef08a;
+  --accent-red: #ef4444;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #3b3b3b;
+  --text-muted: #6b6b6b;
+
+  --border-subtle: rgba(26, 26, 26, 0.08);
+  --border-hover: rgba(26, 26, 26, 0.18);
+  --border-accent: rgba(26, 26, 26, 0.3);
+
+  --shadow-card: 6px 6px 0px 0px #1a1a1a;
+  --shadow-card-pressed: 3px 3px 0px 0px #1a1a1a;
+
+  --font-heading: 'Kalam', cursive;
+  --font-body: 'Patrick Hand', cursive;
+
+  --radius-wobbly: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+/* Paper dot texture (radial dots) */
+.sketchbook .paper-dots {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(#e5e0d8 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+
+/* Wobbly bordered card */
+.wobbly-border {
+  border-radius: var(--radius-wobbly);
+  border: 3px solid #1a1a1a;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* Hard shadow pressed state */
+.wobbly-border:active {
+  box-shadow: 3px 3px 0px 0px #1a1a1a;
+  transform: translateY(3px);
+}
+
+/* Float animation for decorative elements */
+@keyframes sketch-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.float-slow { animation: sketch-float 4s ease-in-out infinite; }
+
+/* Scroll reveal with slight bounce */
+@keyframes sketch-reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sketch-reveal { animation: sketch-reveal 0.6s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+
+/* Slight hover rotation for cards */
+.sketch-card { transition: transform 300ms ease; }
+.sketch-card:hover { transform: rotate(1deg); }
+
+/* Tape overlay */
+.tape {
+  position: absolute;
+  width: 80px;
+  height: 25px;
+  background: rgba(0,0,0,0.05);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(0,0,0,0.1);
+  transform: rotate(-3deg);
+  z-index: 10;
+}
+
+/* Thumbtack pin */
+.thumbtack {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 2px 0px rgba(0,0,0,0.15);
+  z-index: 20;
+}
+
+/* Wavy underline for links */
+.wavy-underline {
+  text-decoration: none;
+}
+.wavy-underline:hover {
+  text-underline-offset: 8px;
+  text-decoration: underline wavy #fb923c 2px;
+}
+
+/* Scribble underline helper (use with inline svg background) */
+.scribble-underline { position: relative; display: inline-block; }
+.scribble-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px; height: 12px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 20"><path d="M0 10 C30 18 60 2 100 10 C140 18 170 2 200 10" stroke="%231a1a1a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: cover;
+  pointer-events: none;
+}
+
+/* Heading & body typography overrides for sketchbook */
+.sketchbook h1 { font-family: var(--font-heading); font-size: 96px; line-height: 0.95; color: var(--text-primary); }
+.sketchbook h2 { font-family: var(--font-heading); font-size: 48px; color: var(--text-primary); }
+.sketchbook h3 { font-family: var(--font-heading); font-size: 28px; color: var(--text-primary); }
+.sketchbook h4 { font-family: var(--font-heading); font-size: 20px; color: var(--text-primary); }
+.sketchbook p, .sketchbook li, .sketchbook span { font-family: var(--font-body); font-size: 18px; color: var(--text-secondary); }
+.sketchbook .lead { font-family: var(--font-body); font-size: 24px; }
+
 
 /* ========================================
    CSS CUSTOM PROPERTIES — DARK MODE (default)

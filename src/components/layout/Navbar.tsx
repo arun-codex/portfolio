@@ -7,7 +7,7 @@ import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { useThemeContext } from "@/components/providers/ThemeProvider";
 import { navLinks, personal } from "@/data/personal";
 import { cn } from "@/lib/utils";
-import { Sun, Moon, Terminal, Menu, X } from "lucide-react";
+import { Sun, Moon, Terminal, Menu, X, Pencil } from "lucide-react";
 
 const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
 
@@ -37,6 +37,8 @@ function ThemeCycleButton({
       ? "Switch to light mode"
       : theme === "light"
       ? "Switch to cyberpunk mode"
+      : theme === "cyberpunk"
+      ? "Switch to sketchbook mode"
       : "Switch to dark mode";
 
   if (isCyberpunk) {
@@ -70,8 +72,10 @@ function ThemeCycleButton({
         <Moon size={18} />
       ) : theme === "light" ? (
         <Sun size={18} />
-      ) : (
+      ) : theme === "cyberpunk" ? (
         <Terminal size={18} />
+      ) : (
+        <Pencil size={18} />
       )}
     </button>
   );
