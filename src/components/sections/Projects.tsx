@@ -7,6 +7,42 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { projects, projectCategories, type ProjectCategory } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { useThemeContext } from "@/components/providers/ThemeProvider";
+import { Sun, Moon, Terminal, Pencil } from "lucide-react";
+
+function ThemeToggleShort() {
+  const { theme, cycleTheme, mounted } = useThemeContext();
+  if (!mounted) return null;
+
+  const label =
+    theme === "dark"
+      ? "Switch to light mode"
+      : theme === "light"
+      ? "Switch to cyberpunk mode"
+      : theme === "cyberpunk"
+      ? "Switch to sketchbook mode"
+      : "Switch to dark mode";
+
+  return (
+    <button
+      onClick={cycleTheme}
+      className="p-2 rounded-[var(--radius-sm)] hover:bg-[var(--bg-surface-hover)]"
+      style={{ color: "var(--text-secondary)" }}
+      aria-label={label}
+      title={label}
+    >
+      {theme === "dark" ? (
+        <Moon size={16} />
+      ) : theme === "light" ? (
+        <Sun size={16} />
+      ) : theme === "cyberpunk" ? (
+        <Terminal size={16} />
+      ) : (
+        <Pencil size={16} />
+      )}
+    </button>
+  );
+}
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("All");
@@ -27,35 +63,44 @@ export function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          className="flex flex-wrap justify-between items-center gap-2 mb-12"
         >
-          {projectCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={cn(
-                "px-4 py-2 text-sm font-medium rounded-[var(--radius-sm)] transition-all duration-200"
-              )}
-              style={{
-                background:
-                  activeFilter === cat
-                    ? "var(--accent-primary)"
-                    : "var(--bg-glass)",
-                color:
-                  activeFilter === cat
-                    ? "#ffffff"
-                    : "var(--text-secondary)",
-                border: `1px solid ${
-                  activeFilter === cat
-                    ? "var(--accent-primary)"
-                    : "var(--border-subtle)"
-                }`,
-              }}
-              aria-pressed={activeFilter === cat}
-            >
-              {cat}
-            </button>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {projectCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-[var(--radius-sm)] transition-all duration-200"
+                )}
+                style={{
+                  background:
+                    activeFilter === cat
+                      ? "var(--accent-primary)"
+                      : "var(--bg-glass)",
+                  color:
+                    activeFilter === cat
+                      ? "#ffffff"
+                      : "var(--text-secondary)",
+                  border: `1px solid ${
+                    activeFilter === cat
+                      ? "var(--accent-primary)"
+                      : "var(--border-subtle)"
+                  }`,
+                }}
+                aria-pressed={activeFilter === cat}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Theme Toggle for list view */}
+          <div className="ml-2">
+            {/* Small theme toggle that cycles through available themes */}
+            {/** Using context directly keeps this component simple */}
+            <ThemeToggleShort />
+          </div>
         </motion.div>
 
         {/* Projects Grid */}
