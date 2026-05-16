@@ -163,6 +163,7 @@ export function Navbar() {
   const activeId = useScrollSpy(sectionIds);
   const { theme, setTheme, mounted } = useThemeContext();
   const isCyberpunk = theme === "cyberpunk";
+  const isSketchbook = theme === "sketchbook";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -336,6 +337,149 @@ export function Navbar() {
             })}
           </div>
         )}
+      </header>
+    );
+  }
+
+  /* ── Sketchbook Navbar ── */
+  if (isSketchbook) {
+    return (
+      <header
+        className={cn(
+          "fixed top-4 left-0 right-0 z-50 transition-all duration-300 px-6",
+        )}
+      >
+        <nav
+          className="max-w-6xl mx-auto h-16 flex items-center justify-between wobbly-border bg-[var(--bg-surface)] px-6"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          {/* Logo */}
+          <a
+            href="#home"
+            className="font-heading text-2xl font-bold tracking-tight transition-colors"
+            style={{ color: "var(--text-primary)" }}
+            aria-label="Go to top"
+          >
+            {`{${personal.name.split(" ")[0].toLowerCase()}.sketch}`}
+          </a>
+
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => {
+              const isActive = activeId === link.href.replace("#", "");
+              // Cycle colors for wavy underline on hover
+              const colors = ["var(--accent-primary)", "var(--accent-secondary)", "var(--accent-red)"];
+              const hoverColor = colors[navLinks.indexOf(link) % colors.length];
+
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-lg transition-all duration-200 wavy-underline"
+                  )}
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    color: isActive ? hoverColor : "var(--text-primary)",
+                    textDecoration: isActive ? `underline wavy ${hoverColor} 2px` : "none",
+                    textUnderlineOffset: "8px"
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.textDecoration = `underline wavy ${hoverColor} 2px`;
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLElement).style.textDecoration = "none";
+                    }
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+
+            {/* Theme list */}
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+          </div>
+
+          {/* Right: Mobile Controls */}
+          <div className="flex md:hidden items-center gap-2">
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+            <button
+              className="p-2 rounded-[var(--radius-sm)]"
+              style={{ color: "var(--text-primary)" }}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Sketchbook Mobile Menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 top-24 bg-black/10 backdrop-blur-sm md:hidden"
+                onClick={() => setMobileOpen(false)}
+              />
+              <motion.div
+                variants={mobileMenuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="fixed top-24 right-6 w-64 md:hidden p-6 flex flex-col gap-4 wobbly-border bg-[var(--bg-surface)]"
+              >
+                {navLinks.map((link) => {
+                   const isActive = activeId === link.href.replace("#", "");
+                   const colors = ["var(--accent-primary)", "var(--accent-secondary)", "var(--accent-red)"];
+                   const hoverColor = colors[navLinks.indexOf(link) % colors.length];
+
+                   return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "text-xl transition-all duration-200 wavy-underline",
+                      )}
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        color: isActive ? hoverColor : "var(--text-primary)",
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  )
+                })}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </header>
     );
   }
