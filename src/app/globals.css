@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,900,900italic&f[]=satoshi@400,500,700&display=swap');
 @import "tailwindcss";
 
@@ -701,6 +701,101 @@
   background: var(--accent-primary);
   color: var(--bg-primary);
 }
+
+/* ========================================
+   VELORAH CINEMATIC THEME
+   Deep navy, liquid glass, Instrument Serif
+   ======================================== */
+.velorah {
+  --bg-primary: hsl(201, 100%, 13%);
+  --bg-surface: hsl(201, 80%, 10%);
+  --bg-surface-hover: hsl(201, 60%, 15%);
+  --bg-glass: rgba(0, 30, 66, 0.6);
+  --bg-glass-hover: rgba(0, 30, 66, 0.8);
+
+  --accent-primary: hsl(0, 0%, 100%);
+  --accent-primary-hover: hsl(0, 0%, 90%);
+  --accent-primary-glow: rgba(255, 255, 255, 0.1);
+  --accent-secondary: hsl(0, 0%, 10%);
+  --accent-secondary-glow: rgba(255, 255, 255, 0.05);
+
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsl(240, 4%, 66%);
+  --text-muted: hsl(240, 4%, 66%);
+
+  --border-subtle: hsl(0, 0%, 18%);
+  --border-hover: hsl(0, 0%, 30%);
+  --border-accent: hsl(0, 0%, 18%);
+
+  --shadow-glow: none;
+  --shadow-card: none;
+
+  --radius-sm: 9999px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 9999px;
+
+  --transition-fast: 200ms ease-out;
+  --transition-base: 300ms ease-out;
+  --transition-slow: 500ms ease-out;
+
+  --font-display: 'Instrument Serif', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Instrument Serif', serif;
+}
+
+.velorah body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.velorah h1,
+.velorah h2,
+.velorah h3,
+.velorah h4,
+.velorah h5,
+.velorah h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+/* Liquid Glass Effect */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Fade Rise Animations */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
+.animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
+.animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
 
 .cyberpunk *::-webkit-scrollbar-thumb {
   background: #00FF00;

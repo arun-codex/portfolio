@@ -30,6 +30,7 @@ const themeOptions = [
   { key: "terminal", label: "Terminal" },
   { key: "neonspace", label: "NeonSpace" },
   { key: "colobus", label: "Colobus Curio" },
+  { key: "velorah", label: "Velorah" },
 ] as const;
 
 function ThemeMenuControl({
@@ -164,6 +165,7 @@ export function Navbar() {
   const { theme, setTheme, mounted } = useThemeContext();
   const isCyberpunk = theme === "cyberpunk";
   const isSketchbook = theme === "sketchbook";
+  const isVelorah = theme === "velorah";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -175,6 +177,171 @@ export function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  /* ── Velorah Cinematic Navbar ── */
+  if (isVelorah) {
+    const velorahNavLinks = [
+      { label: "Home", href: "#home" },
+      { label: "About", href: "#about" },
+      { label: "Skills", href: "#skills" },
+      { label: "Projects", href: "#projects" },
+      { label: "Contact", href: "#contact" },
+    ];
+
+    return (
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <nav
+          className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          {/* Logo */}
+          <a
+            href="#home"
+            className="text-3xl tracking-tight"
+            style={{
+              fontFamily: "'Instrument Serif', serif",
+              color: "var(--text-primary)",
+              textDecoration: "none",
+            }}
+            aria-label="Go to top"
+          >
+            Velorah<sup className="text-xs">®</sup>
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {velorahNavLinks.map((link) => {
+              const isActive = activeId === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm transition-colors duration-200"
+                  style={{
+                    color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                    }
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+
+            {/* Theme menu */}
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+
+            <a
+              href="#contact"
+              className="liquid-glass rounded-full px-6 py-2.5 text-sm transition-transform duration-200 hover:scale-[1.03]"
+              style={{
+                color: "var(--text-primary)",
+                fontFamily: "'Inter', sans-serif",
+                textDecoration: "none",
+              }}
+            >
+              Begin Journey
+            </a>
+          </div>
+
+          {/* Mobile Controls */}
+          <div className="flex md:hidden items-center gap-2">
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2"
+              style={{ color: "var(--text-primary)" }}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Velorah Mobile Menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 top-20 bg-black/40 backdrop-blur-sm md:hidden"
+                onClick={() => setMobileOpen(false)}
+              />
+              <motion.div
+                variants={mobileMenuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="fixed top-20 right-0 bottom-0 w-72 md:hidden p-6 flex flex-col gap-2"
+                style={{
+                  background: "hsl(201, 100%, 10%)",
+                  borderLeft: "1px solid var(--border-subtle)",
+                }}
+              >
+                {mounted && (
+                  <ThemeMenuControl
+                    theme={theme}
+                    setTheme={setTheme}
+                    isCyberpunk={false}
+                    open={isThemeMenuOpen}
+                    onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                    onClose={() => setIsThemeMenuOpen(false)}
+                  />
+                )}
+                {velorahNavLinks.map((link) => {
+                  const isActive = activeId === link.href.replace("#", "");
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="px-4 py-3 text-sm transition-colors duration-200"
+                      style={{
+                        color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                        fontFamily: "'Inter', sans-serif",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </header>
+    );
+  }
 
   /* ── Cyberpunk Navbar ── */
   if (isCyberpunk) {
