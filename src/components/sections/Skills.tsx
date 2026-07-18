@@ -74,6 +74,7 @@ export function Skills() {
                 name={skill.name}
                 icon={skill.icon}
                 index={i}
+                url={skill.url}
               />
             ))}
           </motion.div>

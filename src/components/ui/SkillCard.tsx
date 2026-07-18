@@ -9,19 +9,24 @@ interface SkillCardProps {
   name: string;
   icon: string;
   index: number;
+  url?: string;
 }
 
 const iconMap = LucideIcons as unknown as Record<string, LucideIcon>;
 
-export function SkillCard({ name, icon, index }: SkillCardProps) {
+export function SkillCard({ name, icon, index, url }: SkillCardProps) {
   const IconComponent = iconMap[icon] || LucideIcons.Code2;
 
   return (
-    <motion.div
+    <motion.a
+      href={url || "#"}
+      target={url ? "_blank" : undefined}
+      rel={url ? "noopener noreferrer" : undefined}
       variants={fadeInUp}
       custom={index}
       whileHover={cardHover}
-      className="glass glass-hover rounded-[var(--radius-md)] p-5 flex items-center gap-4 cursor-default"
+      className={`glass glass-hover rounded-[var(--radius-md)] p-5 flex items-center gap-4 ${url ? "cursor-pointer" : "cursor-default"}`}
+      onClick={!url ? (e) => e.preventDefault() : undefined}
     >
       <div
         className="flex items-center justify-center w-10 h-10 rounded-[var(--radius-sm)]"
@@ -39,7 +44,7 @@ export function SkillCard({ name, icon, index }: SkillCardProps) {
       >
         {name}
       </span>
-    </motion.div>
+    </motion.a>
   );
 }
 
