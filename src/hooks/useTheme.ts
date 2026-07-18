@@ -3,13 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { getStoredTheme, setStoredTheme } from "@/lib/utils";
 
-export type Theme = "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah";
+export type Theme = "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah" | "codenest";
 
-const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus", "velorah"];
+const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus", "velorah", "codenest"];
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
-  root.classList.remove("light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus", "velorah");
+  root.classList.remove("light", "cyberpunk", "sketchbook", "terminal", "neonspace", "colobus", "velorah", "codenest");
   if (theme === "light") root.classList.add("light");
   if (theme === "cyberpunk") root.classList.add("cyberpunk");
   if (theme === "sketchbook") root.classList.add("sketchbook");
@@ -17,6 +17,7 @@ function applyTheme(theme: Theme) {
   if (theme === "neonspace") root.classList.add("neonspace");
   if (theme === "colobus") root.classList.add("colobus");
   if (theme === "velorah") root.classList.add("velorah");
+  if (theme === "codenest") root.classList.add("codenest");
 }
 
 export function useTheme() {

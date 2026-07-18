@@ -31,6 +31,7 @@ const themeOptions = [
   { key: "neonspace", label: "NeonSpace" },
   { key: "colobus", label: "Colobus Curio" },
   { key: "velorah", label: "Velorah" },
+  { key: "codenest", label: "CodeNest" },
 ] as const;
 
 function ThemeMenuControl({
@@ -166,6 +167,7 @@ export function Navbar() {
   const isCyberpunk = theme === "cyberpunk";
   const isSketchbook = theme === "sketchbook";
   const isVelorah = theme === "velorah";
+  const isCodeNest = theme === "codenest";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -335,6 +337,151 @@ export function Navbar() {
                     </a>
                   );
                 })}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </header>
+    );
+  }
+
+  /* ── CodeNest Navbar ── */
+  if (isCodeNest) {
+    const cnNavLinks = [
+      { label: "PROJECTS", href: "#projects" },
+      { label: "BLOG", href: "#about" },
+      { label: "ABOUT", href: "#about" },
+      { label: "RESUME", href: "#resume" },
+    ];
+
+    return (
+      <header className="absolute top-0 left-0 right-0 z-50">
+        <nav
+          className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          {/* Logo */}
+          <a
+            href="#home"
+            className="text-white font-bold text-xl tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif", textDecoration: "none" }}
+            aria-label="CodeNest home"
+          >
+            CodeNest
+          </a>
+
+          {/* Desktop nav links */}
+          <div className="hidden md:flex items-center gap-8">
+            {cnNavLinks.map((link) => (
+              <a
+                key={link.href + link.label}
+                href={link.href}
+                className="text-base transition-colors duration-200"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  color: "rgba(255,255,255,0.7)",
+                  textDecoration: "none",
+                  letterSpacing: "0.04em",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = "#5ed29c";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center gap-3">
+            {mounted && (
+              <ThemeMenuControl
+                theme={theme}
+                setTheme={setTheme}
+                isCyberpunk={false}
+                open={isThemeMenuOpen}
+                onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+                onClose={() => setIsThemeMenuOpen(false)}
+              />
+            )}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2"
+              style={{ color: "#ffffff" }}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Full-screen mobile overlay */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 md:hidden"
+                style={{ background: "rgba(7,11,10,0.97)", zIndex: 40 }}
+                onClick={() => setMobileOpen(false)}
+              />
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween", duration: 0.25 }}
+                className="fixed top-0 right-0 bottom-0 w-72 md:hidden flex flex-col gap-2 p-8 pt-20"
+                style={{ background: "#070b0a", borderLeft: "1px solid rgba(255,255,255,0.08)", zIndex: 50 }}
+              >
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="absolute top-6 right-6"
+                  style={{ color: "#ffffff" }}
+                  aria-label="Close menu"
+                >
+                  <X size={22} />
+                </button>
+                {cnNavLinks.map((link) => (
+                  <a
+                    key={link.href + link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-4 text-lg border-b transition-colors duration-200"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      color: "rgba(255,255,255,0.7)",
+                      borderColor: "rgba(255,255,255,0.06)",
+                      textDecoration: "none",
+                      letterSpacing: "0.04em",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "#5ed29c";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </motion.div>
             </>
           )}

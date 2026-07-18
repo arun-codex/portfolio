@@ -22,6 +22,7 @@ import { CyberpunkDataBar } from "@/components/sections/CyberpunkDataBar";
 import { CyberpunkServicesGrid } from "@/components/sections/CyberpunkServicesGrid";
 import { CyberpunkCTA } from "@/components/sections/CyberpunkCTA";
 import { VelorahHero } from "@/components/sections/VelorahHero";
+import { CodeNestHero } from "@/components/sections/CodeNestHero";
 import { useThemeContext } from "@/components/providers/ThemeProvider";
 
 function PageContent() {
@@ -29,6 +30,7 @@ function PageContent() {
   const isCyberpunk = theme === "cyberpunk";
   const isSketchbook = theme === "sketchbook";
   const isVelorah = theme === "velorah";
+  const isCodeNest = theme === "codenest";
 
   return (
     <>
@@ -40,7 +42,7 @@ function PageContent() {
       </a>
       <Navbar />
       <main id="main-content">
-        {isVelorah ? <VelorahHero /> : isSketchbook ? <SketchbookHero /> : <Hero />}
+        {isCodeNest ? <CodeNestHero /> : isVelorah ? <VelorahHero /> : isSketchbook ? <SketchbookHero /> : <Hero />}
         {isCyberpunk && <CyberpunkDataBar />}
         <About />
         {isSketchbook ? <SketchbookFeatureGrid /> : <Skills />}

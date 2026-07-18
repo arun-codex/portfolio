@@ -31,7 +31,7 @@ export function markVisited(): void {
 /**
  * Get current theme from localStorage.
  */
-export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah" | null {
+export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah" | "codenest" | null {
   if (!isBrowser()) return null;
   const stored = localStorage.getItem("portfolio-theme");
   if (
@@ -42,7 +42,8 @@ export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" 
     stored === "terminal" ||
     stored === "neonspace" ||
     stored === "colobus" ||
-    stored === "velorah"
+    stored === "velorah" ||
+    stored === "codenest"
   ) return stored;
   return null;
 }
@@ -50,7 +51,7 @@ export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "sketchbook" 
 /**
  * Store theme preference.
  */
-export function setStoredTheme(theme: "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah"): void {
+export function setStoredTheme(theme: "dark" | "light" | "cyberpunk" | "sketchbook" | "terminal" | "neonspace" | "colobus" | "velorah" | "codenest"): void {
   if (!isBrowser()) return;
   localStorage.setItem("portfolio-theme", theme);
 }

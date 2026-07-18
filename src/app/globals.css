@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=Kalam:wght@700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,900,900italic&f[]=satoshi@400,500,700&display=swap');
 @import "tailwindcss";
 
@@ -796,6 +796,96 @@
 .animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
 .animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
 .animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
+
+/* ========================================
+   CODENEST CODING EDUCATION THEME
+   Dark green/black, mint accent #5ed29c
+   ======================================== */
+.codenest {
+  --bg-primary: #070b0a;
+  --bg-surface: #0d1512;
+  --bg-surface-hover: #111f1b;
+  --bg-glass: rgba(7, 11, 10, 0.8);
+  --bg-glass-hover: rgba(7, 11, 10, 0.95);
+
+  --accent-primary: #5ed29c;
+  --accent-primary-hover: #4bbf89;
+  --accent-primary-glow: rgba(94, 210, 156, 0.2);
+  --accent-secondary: #5ed29c;
+  --accent-secondary-glow: rgba(94, 210, 156, 0.1);
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(94, 210, 156, 0.3);
+  --border-accent: #5ed29c;
+
+  --shadow-glow: 0 0 40px rgba(94, 210, 156, 0.15);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 9999px;
+
+  --transition-fast: 200ms ease-out;
+  --transition-base: 300ms ease-out;
+  --transition-slow: 500ms ease-out;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', serif;
+  --cn-accent: #5ed29c;
+  --cn-bg: #070b0a;
+}
+
+.codenest body {
+  background: var(--cn-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+/* CodeNest liquid glass card */
+.cn-glass-card {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.cn-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.4) 0%,
+    rgba(255,255,255,0.12) 20%,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.12) 80%,
+    rgba(255,255,255,0.4) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* CodeNest vertical grid lines */
+.cn-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
 
 .cyberpunk *::-webkit-scrollbar-thumb {
   background: #00FF00;
