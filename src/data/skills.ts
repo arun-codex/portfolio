@@ -16,7 +16,7 @@ export const skillCategories: SkillCategory[] = [
 
 export const skills: Skill[] = [
   // Programming
-  { name: "C", icon: "FileCode2", category: "Programming", url: "https://en.cppreference.com/w/c" },
+  { name: "C", icon: "FileCode2", category: "Programming", url: "https://github.com/arun-codex/c-learning-project" },
   { name: "JavaScript", icon: "Braces", category: "Programming", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
   { name: "Python", icon: "FileCode2", category: "Programming", url: "https://github.com/arun-codex/portfolio" },
 
