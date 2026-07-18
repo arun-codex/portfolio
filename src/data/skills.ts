@@ -18,7 +18,7 @@ export const skills: Skill[] = [
   // Programming
   { name: "C", icon: "FileCode2", category: "Programming", url: "https://github.com/arun-codex/c-learning-project" },
   { name: "JavaScript", icon: "Braces", category: "Programming", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { name: "Python", icon: "FileCode2", category: "Programming", url: "https://github.com/arun-codex/portfolio" },
+  { name: "Python", icon: "FileCode2", category: "Programming", url: "https://github.com/arun-codex/Complate-Python-beginner-to-intermediate-" },
 
   // Web Development
   { name: "HTML", icon: "Code2", category: "Web Development", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
