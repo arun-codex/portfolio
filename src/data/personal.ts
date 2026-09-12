@@ -4,7 +4,7 @@ export const personal = {
   bio: `BCA student building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects. Focused on becoming internship-ready through execution rather than theory alone.`,
   email: "arun.cyberx@gmail.com",
   location: "India",
-  website: "https://arunsingh.xyz",
+  website: "https://arunx.xyz",
   resumeUrl: "/resume.pdf",
 } as const;
 

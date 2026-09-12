@@ -52,7 +52,7 @@ export function About() {
   return (
     <section id="about" className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading title="// About" subtitle="Who I Am" />
+        <SectionHeading title="// About" subtitle="About Arun Kumar" />
 
         <motion.div
           variants={staggerContainer}

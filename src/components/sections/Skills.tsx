@@ -16,7 +16,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading title="// Skills" subtitle="Technical Toolkit" />
+        <SectionHeading title="// Skills" subtitle="Technical Skills & Toolkit" />
 
         {/* Category Tabs */}
         <motion.div

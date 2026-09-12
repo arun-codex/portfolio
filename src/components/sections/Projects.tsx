@@ -19,7 +19,7 @@ export function Projects() {
   return (
     <section id="projects" className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading title="// Projects" subtitle="What I've Built" />
+        <SectionHeading title="// Projects" subtitle="Featured Projects" />
 
         {/* Filter Buttons */}
         <motion.div

@@ -38,7 +38,7 @@ export const projects: Project[] = [
     skills: ["HTML", "CSS", "JavaScript"],
     category: "Web",
     github: "https://github.com/mrarunkumar18/portfolio",
-    liveDemo: "https://arunsingh.xyz",
+    liveDemo: "https://arunx.xyz",
     image: "/images/projects/portfolio.png",
   },
   {

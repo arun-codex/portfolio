@@ -29,7 +29,7 @@ const MOCK_RESPONSES: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ["intern", "hire", "recruit", "job", "position", "candidate", "why"],
     answer:
-      "Arun would bring genuine, hands-on value to a cybersecurity internship:\n\n- Built a real **Linux Access Control lab** exploring `chmod`, user roles, and file permissions\n- Actively studying Linux and networking through practical experiments\n- BCA student focused on execution — building skills through real projects\n- Experience with low-level C programming and web development gives broader technical context\n- Has a portfolio of work demonstrating initiative and self-direction\n\nYou can review his projects at [github.com/arun-codex](https://github.com/arun-codex) and his full profile at [arunsingh.xyz](https://arunsingh.xyz).",
+      "Arun would bring genuine, hands-on value to a cybersecurity internship:\n\n- Built a real **Linux Access Control lab** exploring `chmod`, user roles, and file permissions\n- Actively studying Linux and networking through practical experiments\n- BCA student focused on execution — building skills through real projects\n- Experience with low-level C programming and web development gives broader technical context\n- Has a portfolio of work demonstrating initiative and self-direction\n\nYou can review his projects at [github.com/arun-codex](https://github.com/arun-codex) and his full profile at [arunx.xyz](https://arunx.xyz).",
   },
   {
     keywords: ["linux", "access", "permission", "chmod", "security lab"],
@@ -39,7 +39,7 @@ const MOCK_RESPONSES: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ["contact", "email", "reach", "message", "touch"],
     answer:
-      "You can reach Arun through these verified channels:\n\n- **Email:** arun.cyberx@gmail.com\n- **GitHub:** [github.com/arun-codex](https://github.com/arun-codex)\n- **LinkedIn:** [linkedin.com/in/arun-codex](https://www.linkedin.com/in/arun-codex/)\n- **Website:** [arunsingh.xyz](https://arunsingh.xyz)\n- **X (Twitter):** [@itz_arun_1806](https://x.com/itz_arun_1806)",
+      "You can reach Arun through these verified channels:\n\n- **Email:** arun.cyberx@gmail.com\n- **GitHub:** [github.com/arun-codex](https://github.com/arun-codex)\n- **LinkedIn:** [linkedin.com/in/arun-codex](https://www.linkedin.com/in/arun-codex/)\n- **Website:** [arunx.xyz](https://arunx.xyz)\n- **X (Twitter):** [@itz_arun_1806](https://x.com/itz_arun_1806)",
   },
   {
     keywords: ["github", "repository", "repo", "code", "open source"],
@@ -49,7 +49,7 @@ const MOCK_RESPONSES: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ["resume", "cv", "download", "pdf"],
     answer:
-      "You can view or download Arun's resume directly from his portfolio at [arunsingh.xyz](https://arunsingh.xyz) — look for the Resume section or the download button on the page.",
+      "You can view or download Arun's resume directly from his portfolio at [arunx.xyz](https://arunx.xyz) — look for the Resume section or the download button on the page.",
   },
   {
     keywords: ["certification", "cert", "certificate", "course"],
@@ -79,7 +79,7 @@ const MOCK_RESPONSES: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ["who", "about", "arun", "introduce", "tell me"],
     answer:
-      "Arun Kumar is a **BCA student and Cybersecurity Enthusiast** based in India.\n\nHe is building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects — with a clear goal of becoming internship-ready through execution rather than theory alone.\n\n**Focus areas:** Cybersecurity · Linux · Networking · Web Development\n\nYou can explore his work at [arunsingh.xyz](https://arunsingh.xyz) or connect on [LinkedIn](https://www.linkedin.com/in/arun-codex/).",
+      "Arun Kumar is a **BCA student and Cybersecurity Enthusiast** based in India.\n\nHe is building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects — with a clear goal of becoming internship-ready through execution rather than theory alone.\n\n**Focus areas:** Cybersecurity · Linux · Networking · Web Development\n\nYou can explore his work at [arunx.xyz](https://arunx.xyz) or connect on [LinkedIn](https://www.linkedin.com/in/arun-codex/).",
   },
 ];
 

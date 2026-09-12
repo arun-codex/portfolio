@@ -4,6 +4,11 @@ import { cleanup } from "@testing-library/react";
 import { afterEach, beforeAll, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
+vi.mock("next/font/google", () => ({
+  Inter: () => ({ variable: "--font-inter" }),
+  JetBrains_Mono: () => ({ variable: "--font-jetbrains" }),
+  Space_Grotesk: () => ({ variable: "--font-space-grotesk" }),
+}));
 
 afterEach(() => {
   cleanup();

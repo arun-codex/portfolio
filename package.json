@@ -13,6 +13,7 @@
     "test:api": "playwright test tests/api",
     "test:e2e": "playwright test tests/e2e",
     "test:security": "vitest run --config vitest.config.ts tests/security tests/ai",
+    "test:seo": "vitest run --config vitest.config.ts tests/seo",
     "test:a11y": "playwright test tests/accessibility",
     "test:visual": "playwright test tests/visual",
     "test:all": "npm run test && npm run test:api && npm run test:e2e && npm run test:security && npm run test:a11y",
