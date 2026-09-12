@@ -1,4 +1,4 @@
-﻿# Arun AI Memory
+# Arun AI Memory
 
 <!--
   DEVELOPER/ADMIN INSTRUCTIONS
