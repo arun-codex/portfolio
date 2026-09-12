@@ -7,6 +7,7 @@ import { ChatInput } from "./ChatInput";
 import { QuickPrompts } from "./QuickPrompts";
 import { TypingIndicator } from "./TypingIndicator";
 import { type ChatMessage } from "./types";
+import { generateClientId } from "@/lib/utils";
 
 /* ── Constants ─────────────────────────────────────────────────────────── */
 
@@ -63,7 +64,7 @@ function getOrCreateSessionId(): string {
   try {
     let id = sessionStorage.getItem(SESSION_ID_KEY);
     if (!id) {
-      id = crypto.randomUUID();
+      id = generateClientId();
       sessionStorage.setItem(SESSION_ID_KEY, id);
     }
     return id;
@@ -214,7 +215,7 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
       setErrorBanner(null);
 
       const userMsg: ChatMessage = {
-        id: crypto.randomUUID(),
+        id: generateClientId(),
         role: "user",
         content: trimmed,
         timestamp: Date.now(),
@@ -241,7 +242,7 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
         });
 
         const assistantMsg: ChatMessage = {
-          id: crypto.randomUUID(),
+          id: generateClientId(),
           role: "assistant",
           content: answer,
           timestamp: Date.now(),
@@ -264,7 +265,7 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
         setErrorBanner(msg);
 
         const errorMsg: ChatMessage = {
-          id: crypto.randomUUID(),
+          id: generateClientId(),
           role: "assistant",
           content: msg,
           timestamp: Date.now(),
