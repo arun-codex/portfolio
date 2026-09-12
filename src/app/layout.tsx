@@ -105,13 +105,11 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
-      <head>
+      <body className="min-h-screen" style={{ fontFamily: "var(--font-sans)" }} suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="min-h-screen" style={{ fontFamily: "var(--font-sans)" }} suppressHydrationWarning>
         {children}
       </body>
     </html>

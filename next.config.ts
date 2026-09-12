@@ -17,13 +17,10 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
-  {
-    key: "Strict-Transport-Security",
-    value: "max-age=31536000",
-  },
 ];
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["localhost", "127.0.0.1", "192.168.1.17"],
   images: {
     formats: ["image/webp", "image/avif"],
   },

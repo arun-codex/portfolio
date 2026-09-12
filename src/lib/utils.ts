@@ -17,7 +17,11 @@ export function isBrowser(): boolean {
  */
 export function hasVisitedBefore(): boolean {
   if (!isBrowser()) return false;
-  return localStorage.getItem("portfolio-visited") === "true";
+  try {
+    return localStorage.getItem("portfolio-visited") === "true";
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -25,7 +29,11 @@ export function hasVisitedBefore(): boolean {
  */
 export function markVisited(): void {
   if (!isBrowser()) return;
-  localStorage.setItem("portfolio-visited", "true");
+  try {
+    localStorage.setItem("portfolio-visited", "true");
+  } catch {
+    // Ignore storage errors
+  }
 }
 
 /**
@@ -33,15 +41,19 @@ export function markVisited(): void {
  */
 export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "terminal" | "colobus" | null {
   if (!isBrowser()) return null;
-  const stored = localStorage.getItem("portfolio-theme");
-  if (
-    stored === "dark" ||
-    stored === "light" ||
-    stored === "cyberpunk" ||
-    stored === "terminal" ||
-    stored === "colobus"
-  ) return stored;
-  return null;
+  try {
+    const stored = localStorage.getItem("portfolio-theme");
+    if (
+      stored === "dark" ||
+      stored === "light" ||
+      stored === "cyberpunk" ||
+      stored === "terminal" ||
+      stored === "colobus"
+    ) return stored;
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -49,5 +61,9 @@ export function getStoredTheme(): "dark" | "light" | "cyberpunk" | "terminal" | 
  */
 export function setStoredTheme(theme: "dark" | "light" | "cyberpunk" | "terminal" | "colobus"): void {
   if (!isBrowser()) return;
-  localStorage.setItem("portfolio-theme", theme);
+  try {
+    localStorage.setItem("portfolio-theme", theme);
+  } catch {
+    // Ignore storage errors
+  }
 }

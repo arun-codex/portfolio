@@ -57,6 +57,11 @@ const MOCK_RESPONSES: Array<{ keywords: string[]; answer: string }> = [
       "Arun currently holds one verified certification:\n\n- **Introduction to Generative AI** — issued by Google (February 2026)\n  [View credential](https://www.skills.google/public_profiles/28c98619-745d-4f60-ac6e-900f1f52afff/badges/21915333)\n\nHe is actively building toward more cybersecurity-focused certifications.",
   },
   {
+    keywords: ["learning", "currently learning", "learning about"],
+    answer:
+      "Arun is currently learning:\n\n- Ethical hacking and penetration testing methodologies\n- Network security and protocol analysis\n- Secure web application development practices\n- Linux hardening techniques",
+  },
+  {
     keywords: ["education", "study", "bca", "college", "degree", "student"],
     answer:
       "Arun is pursuing a **Bachelor of Computer Applications (BCA)**. He is a student currently building practical cybersecurity skills alongside his formal education through labs, real projects, and hands-on technical experiments.",
@@ -90,6 +95,8 @@ const CANNOT_KEYWORDS = [
   "private", "personal", "address", "phone", "secret",
   "api key", "password", "credential", "token",
   "system prompt", "instructions", "ignore", "reveal",
+  "disable your security rules", "security rules",
+  "modify arun-memory.md", "update arun-memory.md",
 ];
 
 /* ── Implementation ───────────────────────────────────────────────────────── */

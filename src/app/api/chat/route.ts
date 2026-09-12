@@ -3,41 +3,33 @@
  *
  * The Ask Arun AI portfolio assistant API endpoint.
  *
- * Security architecture (Phase 5 Hardened + Supabase persistence):
+ * Security architecture (Phase 7: Local File-Based Memory):
  *   Browser → /api/chat → Server → AI Provider
  *   1. The browser NEVER calls the AI provider directly.
  *   2. API keys are server-side only (never exposed to client).
  *   3. Origin validation: Validates Origin header (production: arunx.xyz; dev: localhost/127.0.0.1).
  *   4. Distributed rate limiting via Upstash Redis with fail-closed production protection.
- *   5. Session resolved from HttpOnly cookie (visitor_sessions table).
- *   6. Conversation get-or-created per session; messages persisted server-side.
- *   7. Strict input validation (types, limits, roles whitelist).
- *   8. Authoritative server-side system prompt generation.
- *   9. AI receives DB history (not client-supplied) as the authoritative conversation context.
- *  10. Gemini request timeout protection with clean error handling.
- *  11. Zero secret or sensitive data leakage in logs or responses.
+ *   5. Strict input validation (types, limits, roles whitelist).
+ *   6. Authoritative server-side system prompt generation combining:
+ *      - Verified portfolio data from src/data/*.ts
+ *      - Arun's manually maintained memory file: src/memory/arun-memory.md
+ *   7. Client-supplied session history used for conversation continuity.
+ *   8. Gemini request timeout protection with clean error handling.
+ *   9. Zero secret or sensitive data leakage in logs or responses.
  *
  * Architecture notes:
- *  - The client sends its current message + a short local history snapshot as a
- *    UX fallback. The server ALWAYS merges this with the authoritative DB history,
- *    deduplicates, and sends the merged result to the AI.
- *  - Supabase persistence is non-blocking on errors: if the DB is unavailable,
- *    the chat still works using the client-supplied history (graceful degradation).
- *  - No ai_memories table. Arun's memory is file-based (src/memory/arun-memory.md).
+ *  - Supabase is NOT required for Ask Arun to work.
+ *  - Visitor persistence in Supabase is deferred for a future phase.
+ *  - Conversation history is maintained by the client in sessionStorage.
+ *  - Arun's memory is file-based and read-only (src/memory/arun-memory.md).
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import { getAIProvider, type AIMessage } from "@/lib/ai/provider";
 import { buildSystemPrompt } from "@/lib/ai/prompts";
 import { checkRateLimit, pruneMemoryEntries } from "@/lib/rate-limit";
-import { resolveVisitorSession } from "@/lib/visitor-session";
-import {
-  getOrCreateConversation,
-  getRecentMessages,
-  persistMessage,
-  verifyOwnership,
-  setConversationTitle,
-} from "@/lib/supabase/persistence";
+// Note: Supabase conversation persistence is deferred to future work.
+// Currently Ask Arun operates with local file-based memory and client-side session history.
 
 /* ── Config ──────────────────────────────────────────────────────────────── */
 
@@ -56,12 +48,6 @@ const MAX_OUTPUT_TOKENS = parseInt(
 const REQUEST_TIMEOUT_MS = parseInt(
   process.env.AI_REQUEST_TIMEOUT_MS ?? "15000",
   10
-);
-
-/** Whether Supabase credentials are configured (persistence is optional). */
-const isSupabaseConfigured = Boolean(
-  (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL) &&
-    process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 /* ── Allowed roles whitelist ─────────────────────────────────────────────── */
@@ -186,89 +172,17 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // ── 7. Supabase persistence (graceful degradation if unavailable) ───────
-  let conversationId: string | null = null;
-  let dbHistory: AIMessage[] = [];
-  const responseHeaders: Record<string, string> = {};
-
-  if (isSupabaseConfigured) {
-    try {
-      // Resolve visitor session from HttpOnly cookie
-      const sessionResult = await resolveVisitorSession();
-
-      if (!sessionResult.dbError && sessionResult.session) {
-        const sessionId = sessionResult.session.id;
-
-        // Carry session cookie forward
-        if (sessionResult.setCookieHeader) {
-          responseHeaders["Set-Cookie"] = sessionResult.setCookieHeader;
-        }
-
-        // Get or create conversation for this session
-        const convResult = await getOrCreateConversation(sessionId);
-
-        if (!convResult.error && convResult.data) {
-          conversationId = convResult.data.id;
-
-          // Verify ownership before reading (service_role bypasses RLS)
-          const owned = await verifyOwnership(conversationId, sessionId);
-
-          if (owned) {
-            // Fetch authoritative DB history (oldest → newest)
-            const msgResult = await getRecentMessages(
-              conversationId,
-              MAX_HISTORY_MESSAGES
-            );
-
-            if (!msgResult.error && msgResult.data) {
-              dbHistory = msgResult.data.map((m) => ({
-                role: m.role,
-                content: m.content,
-              }));
-            }
-          } else {
-            // Ownership mismatch — treat as new conversation
-            conversationId = null;
-          }
-        }
-      }
-    } catch (err) {
-      // DB unavailable — fall back to client-supplied history gracefully
-      console.warn(
-        "[AskArun] Supabase unavailable, using client history:",
-        err instanceof Error ? err.message : "unknown"
-      );
-      conversationId = null;
-    }
-  }
-
-  // ── 8. Merge DB history with client history ────────────────────────────
-  // DB history is authoritative. Client history fills in when DB is unavailable.
-  // If DB history is available, prefer it exclusively to avoid duplication.
-  const historyForAI: AIMessage[] =
-    dbHistory.length > 0
-      ? dbHistory
-      : clientHistory.slice(-MAX_HISTORY_MESSAGES);
+  // ── 7. Conversation history (Local memory / Client session fallback) ────
+  // Supabase visitor persistence is deferred to future work.
+  // Currently operating in local-memory mode: history is maintained in client sessionStorage.
+  const conversationId: string | null = null;
+  const historyForAI: AIMessage[] = clientHistory.slice(-MAX_HISTORY_MESSAGES);
 
   // Append current user message for the AI call
   const messagesForAI: AIMessage[] = [
     ...historyForAI,
     { role: "user", content: message },
   ];
-
-  // ── 9. Persist user message ────────────────────────────────────────────
-  // Fire-and-forget for latency; errors are non-fatal
-  if (conversationId) {
-    void persistMessage(conversationId, "user", message).then((result) => {
-      if (result.error) {
-        console.warn("[AskArun] Failed to persist user message:", result.error);
-      }
-      // Set conversation title from first user message (if conversation is new)
-      if (dbHistory.length === 0) {
-        setConversationTitle(conversationId!, message);
-      }
-    });
-  }
 
   // ── 10. Build authoritative system prompt (server-created) ─────────────
   let systemPrompt: string;
@@ -317,16 +231,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // ── 12. Persist assistant message ──────────────────────────────────────
-  if (conversationId) {
-    void persistMessage(conversationId, "assistant", answer).then((result) => {
-      if (result.error) {
-        console.warn("[AskArun] Failed to persist assistant message:", result.error);
-      }
-    });
-  }
-
-  // ── 13. Return sanitised response ──────────────────────────────────────
+  // ── 10. Return sanitised response ──────────────────────────────────────
   return NextResponse.json(
     { answer, conversationId },
     {
@@ -334,7 +239,6 @@ export async function POST(req: NextRequest) {
       headers: {
         "X-RateLimit-Remaining": String(rateLimit.remaining),
         "Cache-Control": "no-store",
-        ...responseHeaders,
       },
     }
   );
@@ -359,7 +263,6 @@ function isValidOrigin(origin: string | null): boolean {
 
   try {
     const url = new URL(origin);
-    const isProd = process.env.NODE_ENV === "production";
 
     // Production origins
     const prodHosts = new Set(["arunx.xyz", "www.arunx.xyz"]);
@@ -367,16 +270,20 @@ function isValidOrigin(origin: string | null): boolean {
       return true;
     }
 
-    // Development origins: validate protocol, hostname and port
-    if (!isProd) {
-      if (
-        url.protocol === "http:" &&
-        (url.hostname === "localhost" || url.hostname === "127.0.0.1")
-      ) {
-        const port = url.port ? parseInt(url.port, 10) : 80;
-        if (port >= 80 && port <= 65535) {
-          return true;
-        }
+    // Local / private network testing (both development and local production server testing)
+    const isLocal =
+      url.hostname === "localhost" ||
+      url.hostname === "127.0.0.1" ||
+      url.hostname === "::1" ||
+      url.hostname.endsWith(".local") ||
+      /^10\./.test(url.hostname) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(url.hostname) ||
+      /^192\.168\./.test(url.hostname);
+
+    if (isLocal) {
+      const port = url.port ? parseInt(url.port, 10) : (url.protocol === "https:" ? 443 : 80);
+      if (port >= 80 && port <= 65535) {
+        return true;
       }
     }
 

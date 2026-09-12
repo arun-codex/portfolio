@@ -1,4 +1,4 @@
-﻿/**
+/**
  * src/lib/ai/memory-context.ts
  *
  * File-based Arun AI memory loader (Phase 7).
@@ -20,6 +20,7 @@
  *   - Never imported in Client Components (server-only via fs).
  */
 
+import "server-only";
 import fs from "fs";
 import path from "path";
 

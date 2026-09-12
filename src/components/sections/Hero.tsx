@@ -28,15 +28,20 @@ export function Hero() {
       <div className="glow-dot glow-dot-purple top-20 -left-32" />
       <div className="glow-dot glow-dot-cyan bottom-20 -right-32" />
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-6xl mx-auto w-full"
-      >
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
+        <motion.div
+          variants={staggerContainer}
+          initial={false}
+          animate="visible"
+          className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16"
+        >
           {/* Text Content */}
-          <motion.div variants={fadeInLeft} className="flex-1 text-center lg:text-left">
+          <motion.div
+            variants={fadeInLeft}
+            initial={false}
+            animate="visible"
+            className="flex-1 text-center lg:text-left"
+          >
             <p
               className="font-mono text-sm mb-4 tracking-wider"
               style={{ color: "var(--accent-secondary)" }}
@@ -127,6 +132,8 @@ export function Hero() {
           {/* Profile Image */}
           <motion.div
             variants={fadeInUp}
+            initial={false}
+            animate="visible"
             className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 shrink-0"
           >
             <div
@@ -159,11 +166,13 @@ export function Hero() {
               aria-hidden="true"
             />
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
           variants={fadeInUp}
+          initial={false}
+          animate="visible"
           className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
         >
           <span className="text-xs font-mono" style={{ color: "var(--text-muted)" }}>
@@ -176,7 +185,7 @@ export function Hero() {
             <ArrowDown size={16} style={{ color: "var(--text-muted)" }} />
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

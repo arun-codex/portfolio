@@ -17,7 +17,9 @@ export function AskArunButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = useCallback(() => setIsOpen(false), []);
-  const handleToggle = useCallback(() => setIsOpen((prev) => !prev), []);
+  const handleToggle = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
   return (
     <>
@@ -48,15 +50,15 @@ export function AskArunButton() {
           type="button"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={false}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+          transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
               <motion.span
                 key="close"
-                initial={{ opacity: 0, rotate: -90 }}
+                initial={false}
                 animate={{ opacity: 1, rotate: 0 }}
                 exit={{ opacity: 0, rotate: 90 }}
                 transition={{ duration: 0.15 }}
@@ -67,7 +69,7 @@ export function AskArunButton() {
             ) : (
               <motion.span
                 key="spark"
-                initial={{ opacity: 0, rotate: 90 }}
+                initial={false}
                 animate={{ opacity: 1, rotate: 0 }}
                 exit={{ opacity: 0, rotate: -90 }}
                 transition={{ duration: 0.15 }}

@@ -6,7 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run --config vitest.config.ts",
+    "test:unit": "vitest run --config vitest.config.ts tests/unit tests/data tests/ai",
+    "test:integration": "vitest run --config vitest.config.ts tests/integration",
+    "test:api": "playwright test tests/api",
+    "test:e2e": "playwright test tests/e2e",
+    "test:security": "vitest run --config vitest.config.ts tests/security tests/ai",
+    "test:a11y": "playwright test tests/accessibility",
+    "test:visual": "playwright test tests/visual",
+    "test:all": "npm run test && npm run test:api && npm run test:e2e && npm run test:security && npm run test:a11y",
+    "test:watch": "vitest --config vitest.config.ts",
+    "test:report": "npm run test:all && playwright show-report"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -24,14 +35,23 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@types/hls.js": "^0.13.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "jsdom": "^30.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.9"
   }
 }
