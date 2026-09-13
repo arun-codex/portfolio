@@ -34,7 +34,7 @@ export const socialLinks = {
     },
     {
       name: "Instagram",
-      url: "https://www.instagram.com/itz_arun_1806/",
+      url: "https://www.instagram.com/arunx.xyz/",
       icon: "Instagram",
     },
     {

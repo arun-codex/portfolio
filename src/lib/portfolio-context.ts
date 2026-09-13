@@ -101,6 +101,10 @@ export function getPortfolioContext(): PortfolioContext {
       platform: l.name,
       url: l.url,
     })),
+    ...socialLinks.personal.map((l) => ({
+      platform: l.name,
+      url: l.url,
+    })),
   ];
 
   // Projects — map from data/projects.ts
