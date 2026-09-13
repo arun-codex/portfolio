@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
@@ -35,6 +36,37 @@ describe("Ask Arun UI building blocks", () => {
 
     expect(onSend).toHaveBeenCalledWith("Who is Arun?");
     expect(input).toHaveValue("");
+  });
+
+  it("handles voice input start and stop", async () => {
+    // Mock the SpeechRecognition API for this test
+    const mockStart = vi.fn();
+    const mockStop = vi.fn();
+    (window as any).SpeechRecognition = vi.fn().mockImplementation(() => ({
+      continuous: false,
+      interimResults: false,
+      lang: "",
+      start: mockStart,
+      stop: mockStop,
+      onstart: null,
+      onresult: null,
+      onerror: null,
+      onend: null,
+    }));
+
+    const user = userEvent.setup();
+    render(<ChatInputHarness onSend={vi.fn()} />);
+
+    // By default, mic button should be present if supported
+    const micButton = screen.getByRole("button", { name: /use voice input/i });
+    expect(micButton).toBeInTheDocument();
+
+    // Click to start
+    await user.click(micButton);
+    expect(mockStart).toHaveBeenCalled();
+
+    // Clean up
+    delete (window as any).SpeechRecognition;
   });
 
   it("renders assistant responses safely", () => {

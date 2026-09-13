@@ -1530,8 +1530,8 @@ section {
   }
 
   .ask-arun-trigger-wrapper {
-    bottom: 16px;
-    right: 16px;
+    bottom: max(24px, env(safe-area-inset-bottom, 24px));
+    right: max(20px, env(safe-area-inset-right, 20px));
   }
 }
 
@@ -1868,6 +1868,61 @@ section {
 .ask-arun-send-btn:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
+}
+
+.ask-arun-mic-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.ask-arun-mic-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.ask-arun-mic-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ask-arun-mic-btn--listening {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.ask-arun-mic-btn--listening:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.ask-arun-pulse-icon {
+  animation: ask-arun-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes ask-arun-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.ask-arun-voice-error {
+  font-size: 11px;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  text-align: center;
 }
 
 .ask-arun-char-count {
