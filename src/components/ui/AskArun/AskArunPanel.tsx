@@ -8,6 +8,8 @@ import { QuickPrompts } from "./QuickPrompts";
 import { TypingIndicator } from "./TypingIndicator";
 import { type ChatMessage } from "./types";
 import { generateClientId } from "@/lib/utils";
+import { useAskArunTheme } from "@/hooks/useAskArunTheme";
+import { AskArunThemePicker } from "./AskArunThemePicker";
 
 /* ── Constants ─────────────────────────────────────────────────────────── */
 
@@ -146,6 +148,7 @@ interface AskArunPanelProps {
 }
 
 export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
+  const { themeId, setThemeId, themeDef } = useAskArunTheme();
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     // Fast initial render: use sessionStorage cache if available
     const cached = loadCachedHistory();
@@ -307,6 +310,7 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
           <motion.div
             key="panel"
             className="ask-arun-panel"
+            style={themeDef.vars as React.CSSProperties}
             role="dialog"
             aria-modal="true"
             aria-labelledby={headingId}
@@ -327,6 +331,10 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
                 </div>
               </div>
               <div className="ask-arun-header-actions">
+                <AskArunThemePicker
+                  currentThemeId={themeId}
+                  onSelectTheme={setThemeId}
+                />
                 <button
                   className="ask-arun-icon-btn"
                   onClick={handleNewChat}

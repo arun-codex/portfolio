@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { navbarVariants, mobileMenuVariants } from "@/lib/animations";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
@@ -23,11 +23,12 @@ const cyberpunkNavLabels: Record<string, string> = {
 };
 
 const themeOptions = [
-  { key: "dark", label: "Dark" },
-  { key: "light", label: "Light" },
-  { key: "cyberpunk", label: "Cyberpunk" },
-  { key: "terminal", label: "Terminal" },
-  { key: "colobus", label: "Colobus Curio" },
+  { key: "dark", label: "Arun Dark", icon: "🌑" },
+  { key: "light", label: "Light", icon: "☀️" },
+  { key: "cyberpunk", label: "Cyberpunk", icon: "⚡" },
+  { key: "terminal", label: "Terminal", icon: "⌨️" },
+  { key: "colobus", label: "Colobus Curio", icon: "🎨" },
+  { key: "liquid-glass", label: "Liquid Glass", icon: "💧" },
 ] as const;
 
 function ThemeMenuControl({
@@ -45,21 +46,46 @@ function ThemeMenuControl({
   onToggle: () => void;
   onClose: () => void;
 }) {
+  const isLiquidGlass = theme === "liquid-glass";
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
+
   const panelClass = isCyberpunk
     ? "border border-[#FFFFFF] bg-black"
+    : isLiquidGlass
+    ? "border border-white/15 bg-[#07111f]/95 shadow-[0_16px_40px_rgba(0,0,0,0.4),0_0_20px_rgba(93,220,255,0.15)] text-[#f4f8ff]"
     : "border border-[var(--border-subtle)] bg-[var(--bg-glass)]";
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <button
         onClick={onToggle}
         className={cn(
           "flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm transition-all duration-200",
           isCyberpunk
             ? "border border-[#333333] bg-black text-white hover:border-[#00FF00]"
+            : isLiquidGlass
+            ? "border border-white/20 bg-white/5 text-[#f4f8ff] hover:bg-white/10 hover:border-cyan-400/40"
             : "border border-[var(--border-subtle)] bg-[var(--bg-glass)] hover:bg-[var(--bg-surface-hover)]"
         )}
-        style={{ color: isCyberpunk ? "#FFFFFF" : "var(--text-secondary)" }}
+        style={{ color: isCyberpunk ? "#FFFFFF" : isLiquidGlass ? "#f4f8ff" : "var(--text-secondary)" }}
         aria-haspopup="menu"
         aria-expanded={open}
       >
@@ -76,7 +102,7 @@ function ThemeMenuControl({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             className={cn(
-              "absolute right-0 top-full z-20 mt-2 w-[220px] rounded-[var(--radius-md)] p-2 shadow-lg",
+              "absolute right-0 top-full z-[100] mt-2 w-[220px] max-w-[calc(100vw-24px)] rounded-[var(--radius-md)] p-2 shadow-2xl backdrop-blur-md",
               panelClass,
               isCyberpunk && "font-mono"
             )}
@@ -84,7 +110,7 @@ function ThemeMenuControl({
             <div
               className={cn(
                 "px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.18em]",
-                isCyberpunk ? "text-[#FFFFFF]" : "text-[var(--text-muted)]"
+                isCyberpunk ? "text-[#FFFFFF]" : isLiquidGlass ? "text-cyan-300" : "text-[var(--text-muted)]"
               )}
             >
               Theme List
@@ -107,11 +133,15 @@ function ThemeMenuControl({
                       background: isActive
                         ? isCyberpunk
                           ? "#00FF00"
+                          : isLiquidGlass
+                          ? "rgba(93, 220, 255, 0.16)"
                           : "var(--accent-primary)"
                         : "transparent",
                       color: isActive
                         ? isCyberpunk
                           ? "#000000"
+                          : isLiquidGlass
+                          ? "#5DDCFF"
                           : "#ffffff"
                         : isCyberpunk
                         ? "#FFFFFF"
@@ -120,6 +150,8 @@ function ThemeMenuControl({
                         isActive
                           ? isCyberpunk
                             ? "#00FF00"
+                            : isLiquidGlass
+                            ? "rgba(93, 220, 255, 0.45)"
                             : "var(--accent-primary)"
                           : isCyberpunk
                           ? "#333333"
@@ -128,13 +160,18 @@ function ThemeMenuControl({
                     }}
                     aria-pressed={isActive}
                   >
-                    <span className="font-medium">{option.label}</span>
+                    <span className="font-medium flex items-center gap-1.5">
+                      <span className="text-xs" aria-hidden="true">{option.icon}</span>
+                      {option.label}
+                    </span>
                     <span
                       className="text-[11px] uppercase tracking-[0.16em]"
                       style={{
                         color: isActive
                           ? isCyberpunk
-                            ? "#000000"
+                            ? "#00FF00"
+                            : isLiquidGlass
+                            ? "#5DDCFF"
                             : "#ffffff"
                           : isCyberpunk
                           ? "#888888"
@@ -406,6 +443,16 @@ export function Navbar() {
 
         {/* Mobile Controls */}
         <div className="flex md:hidden items-center gap-2">
+          {mounted && (
+            <ThemeMenuControl
+              theme={theme}
+              setTheme={setTheme}
+              isCyberpunk={false}
+              open={isThemeMenuOpen}
+              onToggle={() => setIsThemeMenuOpen((prev) => !prev)}
+              onClose={() => setIsThemeMenuOpen(false)}
+            />
+          )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="p-2 rounded-[var(--radius-sm)]"

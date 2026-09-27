@@ -3,17 +3,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { getStoredTheme, setStoredTheme } from "@/lib/utils";
 
-export type Theme = "dark" | "light" | "cyberpunk" | "terminal" | "colobus";
+export type Theme = "dark" | "light" | "cyberpunk" | "terminal" | "colobus" | "liquid-glass";
 
-const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "terminal", "colobus"];
+const THEME_ORDER: Theme[] = ["dark", "light", "cyberpunk", "terminal", "colobus", "liquid-glass"];
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
-  root.classList.remove("light", "cyberpunk", "terminal", "colobus");
+  root.classList.remove("light", "cyberpunk", "terminal", "colobus", "liquid-glass");
   if (theme === "light") root.classList.add("light");
   if (theme === "cyberpunk") root.classList.add("cyberpunk");
   if (theme === "terminal") root.classList.add("terminal");
   if (theme === "colobus") root.classList.add("colobus");
+  if (theme === "liquid-glass") root.classList.add("liquid-glass");
 }
 
 export function useTheme() {
@@ -28,7 +29,10 @@ export function useTheme() {
       setTheme(stored);
       applyTheme(stored);
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark =
+        typeof window !== "undefined" && typeof window.matchMedia === "function"
+          ? window.matchMedia("(prefers-color-scheme: dark)")?.matches ?? true
+          : true;
       const initial: Theme = prefersDark ? "dark" : "light";
       setTheme(initial);
       applyTheme(initial);

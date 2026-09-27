@@ -5,7 +5,7 @@ import { useRef, useEffect, useState } from "react";
 import { fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { personal, stats } from "@/data/personal";
+import { personal, brandTagline, stats } from "@/data/personal";
 import { Target, BookOpen, Shield } from "lucide-react";
 
 function AnimatedCounter({ value, label }: { value: number; label: string }) {
@@ -52,7 +52,7 @@ export function About() {
   return (
     <section id="about" className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading title="// About" subtitle="About Arun Kumar" />
+        <SectionHeading title="// About" subtitle="Who is Arun?" />
 
         <motion.div
           variants={staggerContainer}
@@ -86,7 +86,8 @@ export function About() {
                     Career Goal
                   </h3>
                   <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                    Become a skilled Cybersecurity Specialist capable of mitigating modern digital threats through hands-on technical execution.
+                    Currently focused on becoming internship-ready for cybersecurity roles,
+                    with particular interest in SOC, Blue Team, Linux, networking, and security operations.
                   </p>
                 </div>
               </div>
@@ -106,7 +107,8 @@ export function About() {
                     Education
                   </h3>
                   <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                    Bachelor of Computer Applications (BCA) — currently building a strong foundation in programming, networking, and security fundamentals.
+                    Bachelor of Computer Applications (BCA) at Parul University, Vadodara
+                    — building strong fundamentals in programming, networking, operating systems, and security.
                   </p>
                 </div>
               </div>
@@ -126,14 +128,15 @@ export function About() {
                     Focus Areas
                   </h3>
                   <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                    Linux system administration, network security, Python for security automation, vulnerability assessment, and secure web development.
+                    Linux administration, networking fundamentals, security concepts,
+                    Python scripting, secure web development, and practical lab work.
                   </p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Stats & Card */}
+          {/* Stats & Code Card */}
           <motion.div variants={fadeInRight} className="space-y-6">
             <GlassCard hover={false} glow>
               <div className="grid grid-cols-3 gap-6">
@@ -153,18 +156,27 @@ export function About() {
                 style={{ color: "var(--text-secondary)" }}
               >
                 <span style={{ color: "var(--accent-primary)" }}>const</span>{" "}
-                <span style={{ color: "var(--accent-secondary)" }}>mission</span> = {`{`}
-                <br />
-                &nbsp;&nbsp;approach:{" "}
-                <span style={{ color: "var(--accent-primary)" }}>&quot;execution over theory&quot;</span>,
+                <span style={{ color: "var(--accent-secondary)" }}>arun</span> = {`{`}
                 <br />
                 &nbsp;&nbsp;status:{" "}
                 <span style={{ color: "var(--accent-primary)" }}>&quot;actively learning&quot;</span>,
                 <br />
                 &nbsp;&nbsp;seeking:{" "}
-                <span style={{ color: "var(--accent-primary)" }}>&quot;internship opportunities&quot;</span>
+                <span style={{ color: "var(--accent-primary)" }}>&quot;cybersecurity internship&quot;</span>,
+                <br />
+                &nbsp;&nbsp;approach:{" "}
+                <span style={{ color: "var(--accent-primary)" }}>&quot;execution over theory&quot;</span>
                 <br />
                 {`}`};
+              </p>
+              <p
+                className="text-xs font-mono mt-4 pt-4"
+                style={{
+                  color: "var(--text-muted)",
+                  borderTop: "1px solid var(--border-subtle)",
+                }}
+              >
+                {"// "}{brandTagline}
               </p>
             </GlassCard>
           </motion.div>

@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "Arun Kumar | Cybersecurity Student & Developer",
     description:
       "Arun Kumar is a BCA student and cybersecurity-focused developer from India, building practical projects in cybersecurity, Linux, networking, and secure software development.",
-    creator: "@itz_arun_1806",
+    creator: "@arunx_xyz",
     images: [
       {
         url: "/images/og-image.png",
@@ -155,7 +155,7 @@ export default function RootLayout({
         "sameAs": [
           "https://github.com/arun-codex",
           "https://www.linkedin.com/in/arun-codex/",
-          "https://x.com/itz_arun_1806",
+          "https://www.instagram.com/arunx.xyz/",
         ],
         "knowsAbout": [
           "Cybersecurity",

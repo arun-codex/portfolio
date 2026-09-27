@@ -84,6 +84,21 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {project.description}
         </p>
 
+        {/* What I learned */}
+        {project.learned && (
+          <div
+            className="text-xs font-mono px-3 py-2 rounded-[var(--radius-sm)] mb-4 leading-relaxed"
+            style={{
+              background: "var(--accent-primary-glow)",
+              color: "var(--text-secondary)",
+              border: "1px solid var(--border-accent)",
+            }}
+          >
+            <span style={{ color: "var(--accent-secondary)" }}>{"// learned: "}</span>
+            {project.learned}
+          </div>
+        )}
+
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2">
           {project.skills.map((skill) => (

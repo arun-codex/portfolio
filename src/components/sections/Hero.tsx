@@ -9,11 +9,12 @@ import { AnimatedGrid } from "@/components/ui/AnimatedGrid";
 import { Download, ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
 import * as LucideIcons from "lucide-react";
-import { Github, Linkedin } from "@/components/ui/SocialIcons";
+import { Github, Linkedin, Instagram } from "@/components/ui/SocialIcons";
 
 const socialIconMap: Record<string, React.ElementType> = {
   Github: Github,
   Linkedin: Linkedin,
+  Instagram: Instagram,
   Mail: LucideIcons.Mail,
 };
 
@@ -42,6 +43,7 @@ export function Hero() {
             animate="visible"
             className="flex-1 text-center lg:text-left"
           >
+            {/* Eyebrow */}
             <p
               className="font-mono text-sm mb-4 tracking-wider"
               style={{ color: "var(--accent-secondary)" }}
@@ -49,6 +51,7 @@ export function Hero() {
               Hello, I&apos;m
             </p>
 
+            {/* Main name */}
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
               style={{ color: "var(--text-primary)" }}
@@ -56,6 +59,7 @@ export function Hero() {
               {personal.name}
             </h1>
 
+            {/* Role */}
             <h2
               className="text-xl sm:text-2xl font-medium mb-3"
               style={{ color: "var(--text-secondary)" }}
@@ -63,6 +67,7 @@ export function Hero() {
               {personal.headline}
             </h2>
 
+            {/* Typewriter */}
             <div
               className="text-lg sm:text-xl font-mono mb-6 h-8"
               style={{ color: "var(--text-muted)" }}
@@ -70,6 +75,7 @@ export function Hero() {
               <TypeWriter words={typingRoles} />
             </div>
 
+            {/* Description */}
             <p
               className="text-base max-w-lg mb-8 leading-relaxed mx-auto lg:mx-0"
               style={{ color: "var(--text-secondary)" }}

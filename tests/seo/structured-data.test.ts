@@ -46,7 +46,7 @@ describe("SEO Structured Data (JSON-LD)", () => {
     const sameAs = (person?.sameAs as string[]) ?? [];
     expect(sameAs).toContain("https://github.com/arun-codex");
     expect(sameAs).toContain("https://www.linkedin.com/in/arun-codex/");
-    expect(sameAs).toContain("https://x.com/itz_arun_1806");
+    expect(sameAs).toContain("https://www.instagram.com/arunx.xyz/");
   });
 
   it("does not expose private secrets or fake credentials in structured data", () => {

@@ -1,12 +1,13 @@
 "use client";
 
-import { personal, socialLinks } from "@/data/personal";
-import { Mail, Heart } from "lucide-react";
-import { Github, Linkedin } from "@/components/ui/SocialIcons";
+import { personal, brandTagline, socialLinks, navLinks } from "@/data/personal";
+import { Mail } from "lucide-react";
+import { Github, Linkedin, Instagram } from "@/components/ui/SocialIcons";
 
 const iconMap: Record<string, React.ReactNode> = {
   Github: <Github size={18} />,
   Linkedin: <Linkedin size={18} />,
+  Instagram: <Instagram size={18} />,
   Mail: <Mail size={18} />,
 };
 
@@ -22,22 +23,45 @@ export function Footer() {
       }}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-8">
           {/* Brand */}
           <div className="text-center md:text-left">
-            <span
-              className="font-mono text-sm font-semibold"
-              style={{ color: "var(--accent-primary)" }}
-            >
-              {personal.name.split(" ")[0].toLowerCase()}@portfolio
-            </span>
             <p
-              className="text-xs mt-1"
+              className="font-semibold text-base mb-1"
+              style={{ color: "var(--text-primary)" }}
+            >
+              {personal.name}
+            </p>
+            <p
+              className="text-sm mb-2"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {personal.headline}
+            </p>
+            <p
+              className="font-mono text-xs"
               style={{ color: "var(--text-muted)" }}
             >
-              Built with Next.js + TypeScript
+              {brandTagline}
             </p>
           </div>
+
+          {/* Nav Links */}
+          <nav aria-label="Footer navigation">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 justify-center md:justify-start">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm transition-colors hover:underline"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* Social Links */}
           <div className="flex items-center gap-3">
@@ -47,7 +71,7 @@ export function Footer() {
                 href={link.url}
                 target={link.url.startsWith("mailto") ? undefined : "_blank"}
                 rel={link.url.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="flex items-center justify-center w-9 h-9 rounded-[var(--radius-sm)] transition-all duration-200"
+                className="flex items-center justify-center w-9 h-9 rounded-[var(--radius-sm)] transition-all duration-200 hover:scale-110"
                 style={{
                   color: "var(--text-secondary)",
                   background: "var(--bg-glass)",
@@ -59,15 +83,17 @@ export function Footer() {
               </a>
             ))}
           </div>
+        </div>
 
-          {/* Copyright */}
-          <p
-            className="flex items-center gap-1.5 text-xs"
-            style={{ color: "var(--text-muted)" }}
-          >
-            © {currentYear} {personal.name}. Made with{" "}
-            <Heart size={12} className="inline" style={{ color: "var(--accent-primary)" }} />
-          </p>
+        {/* Copyright */}
+        <div
+          className="mt-8 pt-6 text-center text-xs"
+          style={{
+            borderTop: "1px solid var(--border-subtle)",
+            color: "var(--text-muted)",
+          }}
+        >
+          © {currentYear} {personal.name}
         </div>
       </div>
     </footer>

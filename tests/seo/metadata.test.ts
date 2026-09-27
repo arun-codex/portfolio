@@ -58,7 +58,7 @@ describe("SEO Metadata Configuration", () => {
     const tw = metadata.twitter as Record<string, unknown> | undefined;
     expect(tw).toBeDefined();
     expect(tw?.card).toBe("summary_large_image");
-    expect(tw?.creator).toBe("@itz_arun_1806");
+    expect(tw?.creator).toBe("@arunx_xyz");
   });
 
   it("points to web app manifest", () => {

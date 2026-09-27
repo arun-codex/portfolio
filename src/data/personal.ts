@@ -1,6 +1,15 @@
+/**
+ * personal.ts — Single source of truth for personal brand information.
+ *
+ * Rules:
+ *   - Do NOT duplicate these values across components.
+ *   - Communication email: arun.cyberx@gmail.com (never change this).
+ *   - All social URLs must match the verified public profiles.
+ */
+
 export const personal = {
   name: "Arun Kumar",
-  headline: "Cybersecurity Enthusiast & Developer",
+  headline: "Cybersecurity Student & Developer",
   bio: `BCA student building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects. Focused on becoming internship-ready through execution rather than theory alone.`,
   email: "arun.cyberx@gmail.com",
   location: "India",
@@ -8,7 +17,11 @@ export const personal = {
   resumeUrl: "/resume.pdf",
 } as const;
 
+export const brandTagline = "Learn. Practice. Build. Document. Improve.";
+export const resumeUpdated = "2026-09-01"; // ISO date — update when resume changes
+
 export const socialLinks = {
+  /** Professional links — shown in Hero, Footer, Contact, and Ask Arun */
   professional: [
     {
       name: "GitHub",
@@ -21,17 +34,18 @@ export const socialLinks = {
       icon: "Linkedin",
     },
     {
+      name: "Instagram",
+      url: "https://www.instagram.com/arunx.xyz/",
+      icon: "Instagram",
+    },
+    {
       name: "Email",
       url: "mailto:arun.cyberx@gmail.com",
       icon: "Mail",
     },
   ],
+  /** Personal / lifestyle links — shown in Contact "More About Me" expander */
   personal: [
-    {
-      name: "X (Twitter)",
-      url: "https://x.com/itz_arun_1806",
-      icon: "Twitter",
-    },
     {
       name: "Instagram",
       url: "https://www.instagram.com/arunx.xyz/",
