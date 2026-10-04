@@ -189,6 +189,18 @@ export async function POST(req: NextRequest) {
   try {
     const { getLiveProfileSnapshot } = await import("@/lib/live-profile");
     liveProfile = await getLiveProfileSnapshot();
+
+    // --- DIAGNOSTICS (Server logs only) ---
+    const igStatus = liveProfile.sources.instagram?.status;
+    const igCount = liveProfile.recentActivity.filter(a => a.source === 'instagram').length;
+    console.log(`[DIAGNOSTICS] liveProfileEnabled: ${liveProfile.freshness.overallStatus !== 'disabled'}`);
+    console.log(`[DIAGNOSTICS] instagramEnabled: ${Boolean(liveProfile.sources.instagram)}`);
+    console.log(`[DIAGNOSTICS] instagramSourceStatus: ${igStatus}`);
+    console.log(`[DIAGNOSTICS] instagramDataPresent: ${igCount > 0}`);
+    console.log(`[DIAGNOSTICS] aggregatorSources: ${Object.keys(liveProfile.sources).join(',')}`);
+    console.log(`[DIAGNOSTICS] liveProfileIncludedInChatContext: ${Boolean(liveProfile && liveProfile.freshness.overallStatus !== 'disabled')}`);
+    // --------------------------------------
+
   } catch (err) {
     console.error("[AskArun] Failed to fetch live profile snapshot:", err);
     // Continue without live profile rather than failing the request
