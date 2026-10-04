@@ -23,7 +23,7 @@ describe("portfolio context", () => {
     expect(ctx.certifications).toHaveLength(
       certifications.filter((cert) => cert.status === "verified").length
     );
-    expect(serializePortfolioContext(ctx)).toContain("Only use the information above");
+    expect(serializePortfolioContext(ctx)).toContain("Verified portfolio data is authoritative");
     expect(serializePortfolioContext(ctx)).toContain("Arun Kumar");
   });
 

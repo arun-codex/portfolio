@@ -159,6 +159,7 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
   const [isSending, setIsSending] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
+  const [liveProfileHealth, setLiveProfileHealth] = useState<{status: string, enabled: boolean} | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const headingId = `${panelId}-heading`;
@@ -186,6 +187,21 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
       })
       .finally(() => {
         setIsRestoring(false);
+      });
+      
+    // Also fetch live profile health for indicator
+    fetch("/api/profile/health", { signal: AbortSignal.timeout(5000) })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.enabled) {
+          setLiveProfileHealth({
+            enabled: data.enabled,
+            status: data.overallFreshness || "unknown"
+          });
+        }
+      })
+      .catch(() => {
+        // ignore
       });
   }, [isOpen]);
 
@@ -325,9 +341,34 @@ export function AskArunPanel({ isOpen, onClose }: AskArunPanelProps) {
               <div className="ask-arun-header-identity">
                 <SparkIcon size={18} />
                 <div>
-                  <h2 id={headingId} className="ask-arun-title">
-                    Ask Arun
-                  </h2>
+                  <div className="flex items-center gap-2">
+                    <h2 id={headingId} className="ask-arun-title">
+                      Ask Arun
+                    </h2>
+                    {liveProfileHealth?.enabled && (
+                      <span 
+                        className="text-[10px] px-1.5 py-0.5 rounded-full border flex items-center gap-1 opacity-70"
+                        title={`Live profile is ${liveProfileHealth.status}`}
+                        style={{
+                          borderColor: "var(--border-subtle)",
+                          backgroundColor: "var(--bg-glass)",
+                          color: "var(--text-secondary)"
+                        }}
+                      >
+                        <span 
+                          className="w-1.5 h-1.5 rounded-full" 
+                          style={{
+                            backgroundColor: liveProfileHealth.status === "healthy" 
+                              ? "var(--accent-primary)" 
+                              : liveProfileHealth.status === "stale" 
+                              ? "orange" 
+                              : "red"
+                          }}
+                        />
+                        Live
+                      </span>
+                    )}
+                  </div>
                   <p className="ask-arun-subtitle">AI portfolio assistant</p>
                 </div>
               </div>

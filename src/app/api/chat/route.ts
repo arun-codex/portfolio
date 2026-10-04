@@ -184,10 +184,20 @@ export async function POST(req: NextRequest) {
     { role: "user", content: message },
   ];
 
-  // ── 10. Build authoritative system prompt (server-created) ─────────────
+  // ── 8. Fetch Live Profile Snapshot (cached) ─────────────────────────────
+  let liveProfile = undefined;
+  try {
+    const { getLiveProfileSnapshot } = await import("@/lib/live-profile");
+    liveProfile = await getLiveProfileSnapshot();
+  } catch (err) {
+    console.error("[AskArun] Failed to fetch live profile snapshot:", err);
+    // Continue without live profile rather than failing the request
+  }
+
+  // ── 9. Build authoritative system prompt (server-created) ─────────────
   let systemPrompt: string;
   try {
-    systemPrompt = buildSystemPrompt();
+    systemPrompt = buildSystemPrompt(liveProfile);
   } catch (err) {
     console.error(
       "[AskArun] Failed to build system prompt:",
@@ -196,7 +206,7 @@ export async function POST(req: NextRequest) {
     return errorResponse(500, "I'm having trouble right now. Please try again in a moment.");
   }
 
-  // ── 11. Call AI provider with timeout protection ────────────────────────
+  // ── 10. Call AI provider with timeout protection ────────────────────────
   let answer: string;
   try {
     const provider = await getAIProvider();

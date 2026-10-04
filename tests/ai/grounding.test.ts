@@ -18,7 +18,7 @@ describe("AI grounding", () => {
 
     expect(prompt).toContain("ARUN_MEMORY_TEST_MARKER_2026");
     expect(prompt).not.toContain("hidden note");
-    expect(prompt).toContain("Only use the information above");
+    expect(prompt).toContain("Verified portfolio data is authoritative");
   });
 
   it("answers identity and career questions using portfolio facts", async () => {
