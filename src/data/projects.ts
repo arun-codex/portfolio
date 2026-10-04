@@ -31,6 +31,18 @@ export const projectCategories: ProjectCategory[] = [
 
 export const projects: Project[] = [
   {
+    id: "cybersecurity-learning",
+    title: "Cybersecurity Learning Journey",
+    description:
+      "My hands-on cybersecurity learning journey focused on networking, Linux, SOC, Blue Team, security analysis, and practical labs. A public record of practical study — not a finished product.",
+    learned:
+      "Networking (OSI, TCP/IP, DNS, HTTP/HTTPS, TLS), Linux (filesystem, permissions, users/groups, processes), network troubleshooting (ping, traceroute, firewall, ss), and security fundamentals (CIA triad, AAA, threat/vulnerability/risk, IOC/TTP, phishing, brute force, malware).",
+    skills: ["Linux", "Networking", "SOC", "Blue Team", "Security Analysis", "Practical Labs"],
+    category: "Security",
+    github: "https://github.com/arun-codex/cybersecurity-learning",
+    image: "/images/projects/cybersecurity-learning.png",
+  },
+  {
     id: "linux-access-control",
     title: "Linux Access Control Lab",
     description:
