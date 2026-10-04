@@ -32,10 +32,6 @@ import type {
 
 const VERIFIED_PROFILE_URL = "https://www.linkedin.com/in/arun-codex/";
 
-function getAccessToken(): string | null {
-  return process.env.LINKEDIN_ACCESS_TOKEN ?? null;
-}
-
 function isEnabled(): boolean {
   const flag = process.env.LIVE_LINKEDIN_ENABLED;
   if (flag === "false" || flag === "0") return false;
@@ -43,7 +39,9 @@ function isEnabled(): boolean {
 }
 
 function isConfigured(): boolean {
-  return Boolean(getAccessToken());
+  // LinkedIn is intentionally unavailable because the OpenID Connect API
+  // does not provide the recent activity or full profile data required.
+  return false;
 }
 
 /* ── Adapter ─────────────────────────────────────────────────────────────── */
@@ -55,100 +53,25 @@ export const linkedinAdapter: LiveSourceAdapter<LinkedInSourceSnapshot> = {
   isConfigured,
 
   async fetch(): Promise<LiveSourceFetchResult<LinkedInSourceSnapshot>> {
-    if (!isConfigured()) {
-      return {
-        snapshot: {
-          source: "linkedin",
-          status: "not_configured",
-          lastSyncedAt: null,
-          nextSyncAt: null,
-          error:
-            "LinkedIn API credentials not configured. Requires LINKEDIN_ACCESS_TOKEN from OAuth2 flow.",
-          profile: {
-            profileUrl: VERIFIED_PROFILE_URL,
-            headline: null,
-          },
-          activities: [],
-          metadata: {
-            note: "LinkedIn API requires a Developer Application and OAuth2 user consent. See https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/sign-in-with-linkedin-v2",
-          },
+    return {
+      snapshot: {
+        source: "linkedin",
+        status: "not_configured",
+        lastSyncedAt: null,
+        nextSyncAt: null,
+        error: "LinkedIn live data is intentionally unavailable due to platform API restrictions.",
+        profile: {
+          profileUrl: VERIFIED_PROFILE_URL,
+          headline: null,
         },
-        etag: null,
-        notModified: false,
-      };
-    }
-
-    const startMs = Date.now();
-    const token = getAccessToken()!;
-
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
-
-      // LinkedIn v2 API — userinfo endpoint (OpenID Connect)
-      const res = await fetch("https://api.linkedin.com/v2/userinfo", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+        activities: [],
+        metadata: {
+          note: "LinkedIn live data is not currently available. Arun's LinkedIn profile link is available as static portfolio information.",
         },
-        signal: controller.signal,
-      });
-      clearTimeout(timeout);
-
-      if (!res.ok) {
-        throw new Error(`LinkedIn API ${res.status}: ${res.statusText}`);
-      }
-
-      const data = (await res.json()) as Record<string, unknown>;
-
-      const profile: LinkedInProfile = {
-        profileUrl: VERIFIED_PROFILE_URL,
-        headline: typeof data.headline === "string" ? data.headline : null,
-      };
-
-      const durationMs = Date.now() - startMs;
-      console.log(
-        `[LIVE_PROFILE] source=linkedin status=healthy duration=${durationMs}ms`
-      );
-
-      return {
-        snapshot: {
-          source: "linkedin",
-          status: "healthy",
-          lastSyncedAt: new Date().toISOString(),
-          nextSyncAt: null,
-          error: null,
-          profile,
-          activities: [], // LinkedIn API does not easily expose activity feed
-          metadata: {},
-        },
-        etag: null,
-        notModified: false,
-      };
-    } catch (err) {
-      const durationMs = Date.now() - startMs;
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.error(
-        `[LIVE_PROFILE] source=linkedin status=error error="${message}" duration=${durationMs}ms`
-      );
-
-      return {
-        snapshot: {
-          source: "linkedin",
-          status: "error",
-          lastSyncedAt: null,
-          nextSyncAt: null,
-          error: message,
-          profile: {
-            profileUrl: VERIFIED_PROFILE_URL,
-            headline: null,
-          },
-          activities: [],
-          metadata: {},
-        },
-        etag: null,
-        notModified: false,
-      };
-    }
+      },
+      etag: null,
+      notModified: false,
+    };
   },
 };
+

@@ -102,4 +102,9 @@ describe("AI Prompts", () => {
     const prompt = buildSystemPrompt(dummyLiveProfile);
     expect(prompt).toContain("STATIC VERIFIED DATA (Highest Authority)");
   });
+
+  it("6. LinkedIn shows as unconfigured/unavailable", () => {
+    const prompt = buildSystemPrompt(dummyLiveProfile);
+    expect(prompt).toContain("Linkedin: not configured");
+  });
 });
