@@ -1598,12 +1598,13 @@ section {
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--panel-border, var(--border-subtle));
-  background: var(--panel-bg, var(--bg-surface));
-  box-shadow: var(--glow-shadow, var(--shadow-card)), 0 0 0 1px var(--panel-border, var(--border-subtle));
+  border: 1px solid var(--ask-panel-border, var(--border-subtle));
+  background: var(--ask-panel-bg, var(--bg-surface));
+  box-shadow: var(--ask-glow-shadow, var(--shadow-card));
   overflow: hidden;
   transition: background 300ms ease, border-color 300ms ease, color 200ms ease, box-shadow 300ms ease;
   backdrop-filter: blur(16px);
+  color: var(--ask-panel-text, var(--text-primary));
 }
 
 /* Mobile: near full-screen */
@@ -1633,8 +1634,8 @@ section {
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  border-bottom: 1px solid var(--panel-border, var(--border-subtle));
-  background: var(--header-bg, transparent);
+  border-bottom: 1px solid var(--ask-panel-border, var(--border-subtle));
+  background: var(--ask-panel-surface, transparent);
   flex-shrink: 0;
   transition: background 300ms ease, border-color 300ms ease;
 }
@@ -1648,14 +1649,14 @@ section {
 .ask-arun-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--ask-panel-text, var(--text-primary));
   margin: 0;
   line-height: 1;
 }
 
 .ask-arun-subtitle {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--ask-panel-muted, var(--text-muted));
   margin: 2px 0 0;
   line-height: 1;
 }
@@ -1675,18 +1676,18 @@ section {
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--ask-panel-muted, var(--text-muted));
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
 .ask-arun-icon-btn:hover {
   background: var(--bg-surface-hover);
-  color: var(--text-primary);
+  color: var(--ask-panel-text, var(--text-primary));
 }
 
 .ask-arun-icon-btn:focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--ask-accent, var(--accent-primary));
   outline-offset: 1px;
 }
 
@@ -1724,8 +1725,8 @@ section {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--accent-primary-glow);
-  border: 1px solid var(--border-accent);
+  background: var(--ask-accent-glow, var(--accent-primary-glow));
+  border: 1px solid var(--ask-panel-border, var(--border-accent));
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -1742,15 +1743,15 @@ section {
 }
 
 .ask-arun-bubble--user {
-  background: var(--user-bubble-bg, var(--accent-primary));
-  color: var(--user-bubble-text, #ffffff);
+  background: var(--ask-user-bg, var(--accent-primary));
+  color: var(--ask-user-text, #ffffff);
   border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
 }
 
 .ask-arun-bubble--assistant {
-  background: var(--assistant-bubble-bg, var(--bg-glass));
-  border: 1px solid var(--assistant-bubble-border, var(--border-subtle));
-  color: var(--assistant-bubble-text, var(--text-primary));
+  background: var(--ask-assistant-bg, var(--bg-glass));
+  border: 1px solid var(--ask-assistant-border, var(--border-subtle));
+  color: var(--ask-assistant-text, var(--text-primary));
   border-radius: 4px var(--radius-md) var(--radius-md) var(--radius-md);
 }
 
@@ -1791,34 +1792,34 @@ section {
   margin-bottom: 3px;
   font-family: var(--font-sans);
   font-size: 13.5px;
-  color: var(--text-primary);
+  color: var(--ask-assistant-text, var(--text-primary));
 }
 
 .ask-arun-inline-code {
   font-family: var(--font-mono);
   font-size: 12px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
+  background: var(--ask-code-bg, var(--bg-primary));
+  border: 1px solid var(--ask-panel-border, var(--border-subtle));
   border-radius: 3px;
   padding: 1px 5px;
-  color: var(--accent-secondary);
+  color: var(--ask-accent, var(--accent-secondary));
 }
 
 .ask-arun-code-block {
   margin: 8px 0;
   padding: 10px 12px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
+  background: var(--ask-code-bg, var(--bg-primary));
+  border: 1px solid var(--ask-panel-border, var(--border-subtle));
   border-radius: var(--radius-sm);
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ask-assistant-text, var(--text-secondary));
   white-space: pre;
 }
 
 .ask-arun-link {
-  color: var(--accent-primary);
+  color: var(--ask-accent, var(--accent-primary));
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: opacity var(--transition-fast);
@@ -1839,10 +1840,10 @@ section {
 
 .ask-arun-quick-prompt-btn {
   text-align: left;
-  background: var(--bg-glass);
-  border: 1px solid var(--border-subtle);
+  background: var(--ask-assistant-bg, var(--bg-glass));
+  border: 1px solid var(--ask-panel-border, var(--border-subtle));
   border-radius: var(--radius-sm);
-  color: var(--text-secondary);
+  color: var(--ask-panel-muted, var(--text-secondary));
   font-family: var(--font-sans);
   font-size: 12.5px;
   padding: 8px 12px;
@@ -1852,13 +1853,13 @@ section {
 }
 
 .ask-arun-quick-prompt-btn:hover {
-  background: var(--bg-surface-hover);
-  border-color: var(--border-accent);
-  color: var(--text-primary);
+  background: var(--ask-panel-surface, var(--bg-surface-hover));
+  border-color: var(--ask-accent, var(--border-accent));
+  color: var(--ask-panel-text, var(--text-primary));
 }
 
 .ask-arun-quick-prompt-btn:focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--ask-accent, var(--accent-primary));
   outline-offset: 1px;
 }
 
@@ -1875,7 +1876,7 @@ section {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--text-muted);
+  background: var(--ask-panel-muted, var(--text-muted));
   animation: ask-arun-bounce 1.2s ease-in-out infinite;
 }
 
@@ -1895,7 +1896,7 @@ section {
 
 .ask-arun-input-area {
   padding: 12px 14px;
-  border-top: 1px solid var(--panel-border, var(--border-subtle));
+  border-top: 1px solid var(--ask-panel-border, var(--border-subtle));
   flex-shrink: 0;
   background: transparent;
 }
@@ -1904,15 +1905,15 @@ section {
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  background: var(--input-bg, var(--bg-primary));
-  border: 1px solid var(--input-border, var(--border-subtle));
+  background: var(--ask-input-bg, var(--bg-primary));
+  border: 1px solid var(--ask-input-border, var(--border-subtle));
   border-radius: var(--radius-md);
   padding: 8px 8px 8px 12px;
   transition: border-color var(--transition-fast);
 }
 
 .ask-arun-input-wrapper:focus-within {
-  border-color: var(--accent-primary);
+  border-color: var(--ask-accent, var(--accent-primary));
 }
 
 .ask-arun-input-wrapper--error {
@@ -1927,7 +1928,7 @@ section {
   resize: none;
   font-family: var(--font-sans);
   font-size: 13.5px;
-  color: var(--text-primary);
+  color: var(--ask-panel-text, var(--text-primary));
   line-height: 1.5;
   min-height: 22px;
   max-height: 120px;
@@ -1936,7 +1937,7 @@ section {
 }
 
 .ask-arun-textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--ask-panel-muted, var(--text-muted));
 }
 
 .ask-arun-textarea:disabled {
@@ -1952,15 +1953,15 @@ section {
   height: 32px;
   border-radius: var(--radius-sm);
   border: none;
-  background: var(--accent-primary);
-  color: #ffffff;
+  background: var(--ask-accent, var(--accent-primary));
+  color: var(--ask-user-text, #ffffff);
   cursor: pointer;
   flex-shrink: 0;
   transition: background var(--transition-fast), opacity var(--transition-fast);
 }
 
 .ask-arun-send-btn:hover:not(:disabled) {
-  background: var(--accent-primary-hover);
+  background: var(--ask-accent-hover, var(--accent-primary-hover));
 }
 
 .ask-arun-send-btn:disabled {
@@ -1969,7 +1970,7 @@ section {
 }
 
 .ask-arun-send-btn:focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--ask-accent, var(--accent-primary));
   outline-offset: 2px;
 }
 
@@ -1982,15 +1983,15 @@ section {
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--ask-panel-muted, var(--text-muted));
   cursor: pointer;
   flex-shrink: 0;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
 .ask-arun-mic-btn:hover:not(:disabled) {
-  background: var(--surface-hover);
-  color: var(--text-primary);
+  background: var(--ask-panel-surface, var(--bg-surface-hover));
+  color: var(--ask-panel-text, var(--text-primary));
 }
 
 .ask-arun-mic-btn:disabled {
@@ -2032,7 +2033,7 @@ section {
   margin: 4px 0 0;
   font-size: 11px;
   text-align: right;
-  color: var(--text-muted);
+  color: var(--ask-panel-muted, var(--text-muted));
 }
 
 .ask-arun-char-count--error {
