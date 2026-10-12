@@ -1,0 +1,315 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: e2e/homepage.spec.ts >> homepage renders the portfolio shell
+- Location: tests/e2e/homepage.spec.ts:4:5
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByRole('heading', { name: /Arun Kumar/i })
+Expected: visible
+Error: strict mode violation: getByRole('heading', { name: /Arun Kumar/i }) resolved to 2 elements:
+    1) <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">Arun Kumar</h1> aka getByRole('heading', { name: 'Arun Kumar', exact: true })
+    2) <h2 class="text-3xl md:text-4xl font-bold">About Arun Kumar</h2> aka getByRole('heading', { name: 'About Arun Kumar' })
+
+Call log:
+  - Expect "toBeVisible" getByRole('heading', { name: /Arun Kumar/i }) with timeout 5000ms
+  - waiting for getByRole('heading', { name: /Arun Kumar/i })
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation "Main navigation" [ref=e4]:
+      - link "Go to top" [ref=e5] [cursor=pointer]:
+        - /url: "#home"
+        - text: arun@portfolio
+        - generic [ref=e6]: "|"
+      - generic [ref=e7]:
+        - link "Home" [ref=e8] [cursor=pointer]:
+          - /url: "#home"
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: "#about"
+        - link "Skills" [ref=e10] [cursor=pointer]:
+          - /url: "#skills"
+        - link "Projects" [ref=e11] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Certifications" [ref=e12] [cursor=pointer]:
+          - /url: "#certifications"
+        - link "Resume" [ref=e13] [cursor=pointer]:
+          - /url: "#resume"
+        - link "Contact" [ref=e14] [cursor=pointer]:
+          - /url: "#contact"
+        - button "Theme" [ref=e16]
+  - main [ref=e20]:
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: Hello, I'm
+          - heading "Arun Kumar" [level=1] [ref=e26]
+          - heading "Cybersecurity Enthusiast & Developer" [level=2] [ref=e27]
+          - generic [ref=e28]: Cybe|
+          - paragraph [ref=e29]: BCA student building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects. Focused on becoming internship-ready through execution rather than theory alone.
+          - generic [ref=e30]:
+            - link "Download Resume" [ref=e31] [cursor=pointer]:
+              - /url: /resume.pdf
+            - link "View Projects" [ref=e35] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Contact Me" [ref=e36] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e40]:
+            - link "GitHub" [ref=e41] [cursor=pointer]:
+              - /url: https://github.com/arun-codex
+            - link "LinkedIn" [ref=e45] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/arun-codex/
+            - link "Email" [ref=e50] [cursor=pointer]:
+              - /url: mailto:arun.cyberx@gmail.com
+        - img "Profile photo of Arun Kumar" [ref=e57]
+      - generic [ref=e59]: scroll
+    - generic [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]: // About
+        - heading "About Arun Kumar" [level=2] [ref=e68]
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - paragraph [ref=e72]: BCA student building practical cybersecurity skills through Linux labs, networking experiments, secure development, and hands-on technical projects. Focused on becoming internship-ready through execution rather than theory alone.
+          - generic [ref=e73]:
+            - generic [ref=e80]:
+              - heading "Career Goal" [level=3] [ref=e81]
+              - paragraph [ref=e82]: Become a skilled Cybersecurity Specialist capable of mitigating modern digital threats through hands-on technical execution.
+            - generic [ref=e87]:
+              - heading "Education" [level=3] [ref=e88]
+              - paragraph [ref=e89]: Bachelor of Computer Applications (BCA) — currently building a strong foundation in programming, networking, and security fundamentals.
+            - generic [ref=e94]:
+              - heading "Focus Areas" [level=3] [ref=e95]
+              - paragraph [ref=e96]: Linux system administration, network security, Python for security automation, vulnerability assessment, and secure web development.
+        - generic [ref=e97]:
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - generic [ref=e101]: 0+
+              - generic [ref=e102]: Projects Completed
+            - generic [ref=e103]:
+              - generic [ref=e104]: 0+
+              - generic [ref=e105]: Certifications
+            - generic [ref=e106]:
+              - generic [ref=e107]: 0+
+              - generic [ref=e108]: GitHub Repositories
+          - paragraph [ref=e110]: "const mission = { approach: \"execution over theory\", status: \"actively learning\", seeking: \"internship opportunities\"};"
+    - generic [ref=e112]:
+      - generic [ref=e113]:
+        - generic [ref=e114]: // Skills
+        - heading "Technical Skills & Toolkit" [level=2] [ref=e115]
+      - generic [ref=e117]:
+        - button "Programming" [pressed] [ref=e118]
+        - button "Web Development" [ref=e119]
+        - button "Cybersecurity" [ref=e120]
+        - button "Tools" [ref=e121]
+      - generic [ref=e122]:
+        - link "C" [ref=e123] [cursor=pointer]:
+          - /url: https://github.com/arun-codex/c-learning-project
+        - link "JavaScript" [ref=e131] [cursor=pointer]:
+          - /url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+        - link "Python" [ref=e137] [cursor=pointer]:
+          - /url: https://github.com/arun-codex/Complate-Python-beginner-to-intermediate-
+    - generic [ref=e146]:
+      - generic [ref=e147]:
+        - generic [ref=e148]: // Projects
+        - heading "Featured Projects" [level=2] [ref=e149]
+      - generic [ref=e152]:
+        - button "All" [pressed] [ref=e153]
+        - button "Security" [ref=e154]
+        - button "Web" [ref=e155]
+        - button "Programming" [ref=e156]
+        - button "AI" [ref=e157]
+      - generic [ref=e158]:
+        - article [ref=e159]:
+          - generic [ref=e160]:
+            - img "Screenshot of Linux Access Control Simulation" [ref=e161]
+            - link "View Linux Access Control Simulation on GitHub" [ref=e163] [cursor=pointer]:
+              - /url: https://github.com/mrarunkumar18
+          - generic [ref=e167]:
+            - heading "Linux Access Control Simulation" [level=3] [ref=e168]
+            - paragraph [ref=e169]: Simulated Linux permission systems using chmod, user roles, and file access management. Explored real-world access control scenarios in a controlled lab environment.
+            - generic [ref=e170]:
+              - generic [ref=e171]: Linux
+              - generic [ref=e172]: Bash
+              - generic [ref=e173]: Security
+        - article [ref=e174]:
+          - generic [ref=e175]:
+            - img "Screenshot of Personal Portfolio Website" [ref=e176]
+            - generic [ref=e177]:
+              - link "View Personal Portfolio Website on GitHub" [ref=e178] [cursor=pointer]:
+                - /url: https://github.com/mrarunkumar18/portfolio
+              - link "View live demo of Personal Portfolio Website" [ref=e182] [cursor=pointer]:
+                - /url: https://arunx.xyz
+          - generic [ref=e187]:
+            - heading "Personal Portfolio Website" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Built and deployed a responsive portfolio website using HTML, CSS, and JavaScript. Designed for recruiter visibility and professional branding.
+            - generic [ref=e190]:
+              - generic [ref=e191]: HTML
+              - generic [ref=e192]: CSS
+              - generic [ref=e193]: JavaScript
+        - article [ref=e194]:
+          - generic [ref=e195]:
+            - img "Screenshot of System Programming Practice Toolkit" [ref=e196]
+            - link "View System Programming Practice Toolkit on GitHub" [ref=e198] [cursor=pointer]:
+              - /url: https://github.com/mrarunkumar18
+          - generic [ref=e202]:
+            - heading "System Programming Practice Toolkit" [level=3] [ref=e203]
+            - paragraph [ref=e204]: Built multiple C programs covering arrays, loops, calculators, and file handling. Focused on strengthening low-level programming fundamentals.
+            - generic [ref=e205]:
+              - generic [ref=e206]: C
+              - generic [ref=e207]: Data Structures
+              - generic [ref=e208]: Algorithms
+        - article [ref=e209]:
+          - generic [ref=e210]:
+            - img "Screenshot of AI Workflow Exploration" [ref=e211]
+            - link "View AI Workflow Exploration on GitHub" [ref=e213] [cursor=pointer]:
+              - /url: https://github.com/mrarunkumar18
+          - generic [ref=e217]:
+            - heading "AI Workflow Exploration" [level=3] [ref=e218]
+            - paragraph [ref=e219]: Experimented with prompt engineering, productivity systems, and AI-powered workflows. Explored practical applications of AI tools for development acceleration.
+            - generic [ref=e220]:
+              - generic [ref=e221]: AI
+              - generic [ref=e222]: Prompt Engineering
+              - generic [ref=e223]: Productivity
+        - article [ref=e224]:
+          - generic [ref=e225]:
+            - img "Screenshot of Weather — UI Dashboard" [ref=e226]
+            - generic [ref=e227]:
+              - link "View Weather — UI Dashboard on GitHub" [ref=e228] [cursor=pointer]:
+                - /url: https://github.com/arun-codex/Weather
+              - link "View live demo of Weather — UI Dashboard" [ref=e232] [cursor=pointer]:
+                - /url: https://weather-omega-pink.vercel.app/
+          - generic [ref=e237]:
+            - heading "Weather — UI Dashboard" [level=3] [ref=e238]
+            - paragraph [ref=e239]: A modern weather dashboard built with React and deployed on Vercel. Features saved cities, 7-day forecasts, and responsive UI with smooth animations.
+            - generic [ref=e240]:
+              - generic [ref=e241]: React
+              - generic [ref=e242]: Next.js
+              - generic [ref=e243]: Tailwind
+              - generic [ref=e244]: API
+    - generic [ref=e246]:
+      - generic [ref=e247]:
+        - generic [ref=e248]: // Certifications
+        - heading "Credentials & Learning" [level=2] [ref=e249]
+      - generic [ref=e258]:
+        - heading "Introduction to Generative AI" [level=3] [ref=e259]
+        - paragraph [ref=e260]: Google · Feb 2026
+        - link "Verify Credential" [ref=e261] [cursor=pointer]:
+          - /url: https://www.skills.google/public_profiles/28c98619-745d-4f60-ac6e-900f1f52afff/badges/21915333
+    - generic [ref=e267]:
+      - generic [ref=e268]:
+        - generic [ref=e269]: // Resume
+        - heading "Professional Summary" [level=2] [ref=e270]
+      - generic [ref=e272]:
+        - generic [ref=e280]:
+          - heading "Education" [level=3] [ref=e281]
+          - paragraph [ref=e282]: Bachelor of Computer Applications (BCA) — Building strong fundamentals in CS, networking, and security.
+        - generic [ref=e291]:
+          - heading "Technical Focus" [level=3] [ref=e292]
+          - paragraph [ref=e293]: C programming, web development (HTML/CSS/JS), Linux administration, and database management.
+        - generic [ref=e300]:
+          - heading "Security Learning" [level=3] [ref=e301]
+          - paragraph [ref=e302]: Networking fundamentals, Linux permissions, system hardening, and vulnerability awareness.
+        - generic [ref=e310]:
+          - heading "Seeking" [level=3] [ref=e311]
+          - paragraph [ref=e312]: Internship opportunities in cybersecurity, IT security, or web development to gain real-world experience.
+      - link "Download Full Resume (PDF)" [ref=e314] [cursor=pointer]:
+        - /url: /resume.pdf
+    - generic [ref=e319]:
+      - generic [ref=e320]:
+        - generic [ref=e321]: // Contact
+        - heading "Get In Touch" [level=2] [ref=e322]
+      - generic [ref=e324]:
+        - generic [ref=e325]:
+          - paragraph [ref=e326]: I'm actively looking for internship opportunities in cybersecurity, IT security, and web development. Let's connect.
+          - generic [ref=e327]:
+            - link "arun.cyberx@gmail.com" [ref=e333] [cursor=pointer]:
+              - /url: mailto:arun.cyberx@gmail.com
+            - link "github.com/arun-codex" [ref=e339] [cursor=pointer]:
+              - /url: https://github.com/arun-codex
+            - link "linkedin.com/in/arun-codex" [ref=e346] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/arun-codex/
+            - generic [ref=e347]: India
+          - button "More About Me" [ref=e354]
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - generic [ref=e361]: Name
+            - textbox "Name" [ref=e362]:
+              - /placeholder: Your name
+          - generic [ref=e363]:
+            - generic [ref=e364]: Email
+            - textbox "Email" [ref=e365]:
+              - /placeholder: you@example.com
+          - generic [ref=e366]:
+            - generic [ref=e367]: Message
+            - textbox "Message" [ref=e368]:
+              - /placeholder: Your message...
+          - button "Send Message" [ref=e369]
+  - contentinfo [ref=e373]:
+    - generic [ref=e375]:
+      - generic [ref=e376]:
+        - generic [ref=e377]: arun@portfolio
+        - paragraph [ref=e378]: Built with Next.js + TypeScript
+      - generic [ref=e379]:
+        - link "GitHub" [ref=e380] [cursor=pointer]:
+          - /url: https://github.com/arun-codex
+        - link "LinkedIn" [ref=e384] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/arun-codex/
+        - link "Email" [ref=e389] [cursor=pointer]:
+          - /url: mailto:arun.cyberx@gmail.com
+      - paragraph [ref=e393]: © 2026 Arun Kumar. Made with
+  - generic "Ask Arun AI assistant" [ref=e396]:
+    - generic [aria-hidden]: Ask Arun
+    - button "Open Ask Arun AI assistant" [ref=e397] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e406] [cursor=pointer]:
+    - generic [ref=e409]:
+      - text: Compiling
+      - generic [ref=e410]:
+        - generic [ref=e411]: .
+        - generic [ref=e412]: .
+        - generic [ref=e413]: .
+  - alert [ref=e414]
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from "@playwright/test";
+  2  | import { trackPageIssues, waitForAppReady } from "../helpers/browser";
+  3  | 
+  4  | test("homepage renders the portfolio shell", async ({ page }) => {
+  5  |   const issues = trackPageIssues(page);
+  6  | 
+  7  |   await page.goto("/");
+  8  |   await waitForAppReady(page);
+  9  | 
+  10 |   await expect(page.getByRole("main")).toBeVisible();
+> 11 |   await expect(page.getByRole("heading", { name: /Arun Kumar/i })).toBeVisible();
+     |                                                                    ^ Error: expect(locator).toBeVisible() failed
+  12 |   await expect(page.getByRole("heading", { name: /Cybersecurity Enthusiast & Developer/i })).toBeVisible();
+  13 |   await expect(page.locator("section#projects")).toBeVisible();
+  14 |   await expect(page.locator("section#skills")).toBeVisible();
+  15 |   await expect(page.locator("section#certifications")).toBeVisible();
+  16 |   await expect(page.locator("section#contact")).toBeVisible();
+  17 |   await expect(page.getByRole("button", { name: /open ask arun ai assistant/i })).toBeVisible();
+  18 |   await expect(page.getByRole("navigation", { name: /main navigation/i })).toBeVisible();
+  19 |   await expect(page.getByRole("contentinfo")).toBeVisible();
+  20 | 
+  21 |   await issues.expectClean();
+  22 | });
+```
