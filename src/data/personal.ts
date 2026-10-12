@@ -18,7 +18,7 @@ export const personal = {
 } as const;
 
 export const brandTagline = "Learn. Practice. Build. Document. Improve.";
-export const resumeUpdated = "2026-09-01"; // ISO date — update when resume changes
+export const resumeUpdated = "2026-10-12"; // ISO date — update when resume changes
 
 export const socialLinks = {
   /** Professional links — shown in Hero, Footer, Contact, and Ask Arun */
